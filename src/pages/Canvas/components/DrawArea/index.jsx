@@ -1,13 +1,23 @@
 import React from 'react'
 
-import Line from '../Line'
+import Brush from '../Brush'
+import Rect from '../Rect'
 
-const DrawArea = ({ lines }) => {
+const ToolComponents = {
+	Brush,
+	Rect
+}
+
+const DrawArea = ({ tools }) => {
 	return (
 		<svg className="drawing">
-         {lines.map((line, index) => (
-            <Line key={index} line={line} />
-         ))}
+         {tools.map((tool, index) => {
+				const Component = ToolComponents[tool.type]
+
+				return (
+					<Component key={index} line={tool} />
+				)
+			})}
       </svg>
 	)
 }

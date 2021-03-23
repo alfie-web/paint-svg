@@ -14,6 +14,12 @@
 	stroke-linejoin: round;
 	stroke-linecap: round;
  }
+
+ .rect {
+	fill: none;
+	stroke: black;
+	stroke-width: 3;
+ }
  
  .drawing {
 	width: 100%;
