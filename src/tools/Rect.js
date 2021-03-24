@@ -7,6 +7,7 @@ export default class Rect extends Tool {
 	start = null
 
 	mouseDownHandler(e) {
+		if (e.button !== 0) return
 		this.mouseDown = true
 		
 		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)

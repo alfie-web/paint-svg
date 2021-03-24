@@ -35,7 +35,7 @@ class CanvasState {
 
 	initCanvas(canvas) {
 		this.setCanvas(canvas)
-		toolState.setTool(new Tools.Rect(canvas))		// дефолтный выбранный инструмент
+		toolState.setTool(new Tools.Brush(canvas))		// дефолтный выбранный инструмент
 	}
 
 	setCanvas(canvas) {		// Экшен
