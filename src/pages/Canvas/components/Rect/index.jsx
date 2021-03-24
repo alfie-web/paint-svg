@@ -1,8 +1,10 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 
-const Rect = ({ x, y, width, height }) => {
-
-   return <rect className="rect" x={x} y={y} width={width} height={height} />
+const Rect = ({ tool }) => {
+   const { x, y, w, h } = tool.params
+   
+   return <rect className="rect" x={x} y={y} width={w} height={h} />
 }
 
-export default Rect
+export default observer(Rect)

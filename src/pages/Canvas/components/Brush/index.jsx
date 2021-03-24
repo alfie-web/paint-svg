@@ -1,9 +1,10 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 
-const Brush = ({ line }) => {
+const Brush = ({ tool }) => {
 	const pathData =
       'M ' +
-      line.points
+      tool.points
          .map((p) => {
             return `${p.x} ${p.y}`
          })
@@ -12,7 +13,7 @@ const Brush = ({ line }) => {
    return <path className="path" d={pathData} />
 }
 
-export default Brush
+export default observer(Brush)
 
 
 

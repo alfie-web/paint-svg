@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
+import canvasState from '../../../../store/canvasState'
+
 import DrawArea from '../DrawArea'
 
 const Drawing = () => {
@@ -10,80 +12,190 @@ const Drawing = () => {
 
    const drawAreaRef = useRef()
 
-
    useEffect(() => {
-      document.addEventListener('mouseup', handleMouseUp)
+      canvasState.initCanvas(drawAreaRef.current)
 
-      return () => document.removeEventListener('mouseup', handleMouseUp)
+      // document.addEventListener('mouseup', handleMouseUp)
+
+      // return () => document.removeEventListener('mouseup', handleMouseUp)
    })
 
 
-   const handleMouseDown = (mouseEvent) => {
-      if (mouseEvent.button !== 0) {
-         return
-      }
+   // const handleMouseDown = (mouseEvent) => {
+   //    if (mouseEvent.button !== 0) {
+   //       return
+   //    }
 
-      const point = relativeCoordinatesForEvent(mouseEvent)
+   //    const point = relativeCoordinatesForEvent(mouseEvent)
 
-      setState((prevState) => ({
-         tools: [...prevState.tools, {
-            type: 'Brush',
-            points: [point]
-         }],   // ДОБАВЛЯЕМ НОВУЮ ТОЧКУ
-         isDrawing: true,
-      }))
-   }
+   //    setState((prevState) => ({
+   //       tools: [...prevState.tools, {
+   //          type: 'Brush',
+   //          points: [point]
+   //       }],   // ДОБАВЛЯЕМ НОВУЮ ТОЧКУ
+   //       isDrawing: true,
+   //    }))
+   // }
 
-   const handleMouseMove = (mouseEvent) => {
-      if (!state.isDrawing) {
-         return
-      }
+   // const handleMouseMove = (mouseEvent) => {
+   //    if (!state.isDrawing) {
+   //       return
+   //    }
 
-      const point = relativeCoordinatesForEvent(mouseEvent)
+   //    const point = relativeCoordinatesForEvent(mouseEvent)
 
-      setState((prevState) => ({
-         ...prevState,
-         tools: prevState.tools.map((l, i) => {
-            if (i === prevState.tools.length - 1) {
-               return {
-                  ...l,
-                  points: [
-                     ...l.points,
-                     point
-                  ]
-               }
-            } 
-            return l
-         }),
-      }))
-   }
+   //    setState((prevState) => ({
+   //       ...prevState,
+   //       tools: prevState.tools.map((l, i) => {
+   //          if (i === prevState.tools.length - 1) {
+   //             return {
+   //                ...l,
+   //                points: [
+   //                   ...l.points,
+   //                   point
+   //                ]
+   //             }
+   //          } 
+   //          return l
+   //       }),
+   //    }))
+   // }
 
-   const handleMouseUp = () => {
-      setState({ ...state, isDrawing: false })
-   }
+   // const handleMouseUp = () => {
+   //    setState({ ...state, isDrawing: false })
+   // }
 
-   const relativeCoordinatesForEvent = (mouseEvent) => {
-      const boundingRect = drawAreaRef.current.getBoundingClientRect()
-      return {
-         x: mouseEvent.clientX - boundingRect.left,
-         y: mouseEvent.clientY - boundingRect.top,
-      }
-   }
+   // const relativeCoordinatesForEvent = (mouseEvent) => {
+   //    const boundingRect = drawAreaRef.current.getBoundingClientRect()
+   //    return {
+   //       x: mouseEvent.clientX - boundingRect.left,
+   //       y: mouseEvent.clientY - boundingRect.top,
+   //    }
+   // }
 
    return (
       <div
          className="drawArea"
          ref={drawAreaRef}
-         onMouseDown={handleMouseDown}
-         onMouseMove={handleMouseMove}
+         // onMouseDown={handleMouseDown}
+         // onMouseMove={handleMouseMove}
       >
-         <DrawArea tools={state.tools} />
+         <DrawArea 
+            // tools={state.tools} 
+         />
       </div>
    )
 }
 
 
 export default Drawing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useRef, useEffect } from 'react'
+
+// import DrawArea from '../DrawArea'
+
+// const Drawing = () => {
+//    const [state, setState] = useState({
+//       tools: [],
+//       isDrawing: false
+//    })
+
+//    const drawAreaRef = useRef()
+
+
+//    useEffect(() => {
+//       document.addEventListener('mouseup', handleMouseUp)
+
+//       return () => document.removeEventListener('mouseup', handleMouseUp)
+//    })
+
+
+//    const handleMouseDown = (mouseEvent) => {
+//       if (mouseEvent.button !== 0) {
+//          return
+//       }
+
+//       const point = relativeCoordinatesForEvent(mouseEvent)
+
+//       setState((prevState) => ({
+//          tools: [...prevState.tools, {
+//             type: 'Brush',
+//             points: [point]
+//          }],   // ДОБАВЛЯЕМ НОВУЮ ТОЧКУ
+//          isDrawing: true,
+//       }))
+//    }
+
+//    const handleMouseMove = (mouseEvent) => {
+//       if (!state.isDrawing) {
+//          return
+//       }
+
+//       const point = relativeCoordinatesForEvent(mouseEvent)
+
+//       setState((prevState) => ({
+//          ...prevState,
+//          tools: prevState.tools.map((l, i) => {
+//             if (i === prevState.tools.length - 1) {
+//                return {
+//                   ...l,
+//                   points: [
+//                      ...l.points,
+//                      point
+//                   ]
+//                }
+//             } 
+//             return l
+//          }),
+//       }))
+//    }
+
+//    const handleMouseUp = () => {
+//       setState({ ...state, isDrawing: false })
+//    }
+
+//    const relativeCoordinatesForEvent = (mouseEvent) => {
+//       const boundingRect = drawAreaRef.current.getBoundingClientRect()
+//       return {
+//          x: mouseEvent.clientX - boundingRect.left,
+//          y: mouseEvent.clientY - boundingRect.top,
+//       }
+//    }
+
+//    return (
+//       <div
+//          className="drawArea"
+//          ref={drawAreaRef}
+//          onMouseDown={handleMouseDown}
+//          onMouseMove={handleMouseMove}
+//       >
+//          <DrawArea tools={state.tools} />
+//       </div>
+//    )
+// }
+
+
+// export default Drawing
 
 
 

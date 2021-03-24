@@ -1,4 +1,9 @@
 
+/* * {
+	padding: 0;
+	margin: 0;
+} */
+
 .drawArea {
 	width: 400px;
 	height: 400px;
@@ -19,6 +24,24 @@
 	fill: none;
 	stroke: black;
 	stroke-width: 3;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+ }
+
+ .ellipse {
+	fill: none;
+	stroke: black;
+	stroke-width: 3;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+ }
+
+ .line {
+	fill: none;
+	stroke: black;
+	stroke-width: 3;
+	stroke-linejoin: round;
+	stroke-linecap: round;
  }
  
  .drawing {

@@ -1,25 +1,32 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
+
+import canvasState from '../../../../store/canvasState'
 
 import Brush from '../Brush'
 import Rect from '../Rect'
+import Ellipse from '../Ellipse'
+import Line from '../Line'
 
 const ToolComponents = {
 	Brush,
-	Rect
+	Rect,
+	Ellipse,
+	Line
 }
 
-const DrawArea = ({ tools }) => {
+const DrawArea = () => {
 	return (
 		<svg className="drawing">
-         {tools.map((tool, index) => {
+         {canvasState.canvasData.map((tool, index) => {
 				const Component = ToolComponents[tool.type]
 
 				return (
-					<Component key={index} line={tool} />
+					<Component key={index} tool={tool} />
 				)
 			})}
       </svg>
 	)
 }
 
-export default DrawArea
+export default observer(DrawArea)
