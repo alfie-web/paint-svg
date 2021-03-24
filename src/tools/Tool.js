@@ -10,6 +10,8 @@ export default class Tool {
 
 		this.destroyEvents()
 		this.listen()
+
+		
 	}
 
 	// set fillStyle(color) {
@@ -32,13 +34,14 @@ export default class Tool {
 	destroyEvents() {
 		this.canvas.onmousemove = null
 		this.canvas.onmousedown = null
-		this.canvas.onmouseup =null
+		this.canvas.onmouseup = null
 
-		// window.onmousemove = null
-		// window.onmousedown = null
-		// window.onmouseup =null
+		window.onmousemove = null
+		window.onmousedown = null
+		window.onmouseup = null
 
-		// document.documentElement.style.cursor = 'auto'
+		document.documentElement.style.cursor = 'auto'
+		this.canvas.style.cursor = 'crosshair'
 	}
 
 	mouseDownHandler() {

@@ -1,0 +1,48 @@
+@import '../../styles/vars'
+
+.CanvasPage
+	position: fixed
+	height: 100vh
+	width: 100%
+	background-color: #f6f6f6
+
+	display: flex
+	justify-content: center
+	align-items: center
+
+
+	&__title
+		font: 18px $regular
+
+	
+
+
+.Canvas
+	position: relative
+	display: inline-block
+
+	&__overlay
+		position: absolute
+		z-index: 1000
+		background-color: #fff
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+
+		.Preloader
+			z-index: 2000
+
+	&__element
+		background-color: #fff
+		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03)
+		width: 600px
+		height: 400px
+		cursor: crosshair
+
+
+@media only screen and (max-width: 968px)
+	.CanvasPage
+		&__title
+			display: none !important
+

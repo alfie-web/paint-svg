@@ -1,9 +1,8 @@
-
-import Tool from "./Tool"
+import Tool from './Tool'
 
 import canvasState from '../store/canvasState'
 
-// TODO: 
+// TODO:
 // переименовать в Pen
 // порефакторить метод getCoordsOnSvg - чтобы принимал только event
 
@@ -12,7 +11,7 @@ export default class Brush extends Tool {
    buffer = []
 
    mouseDownHandler(e) {
-		if (e.button !== 0) return
+      if (e.button !== 0) return
       this.mouseDown = true
 
       const curCoords = this.getCoordsOnSvg(
@@ -31,7 +30,8 @@ export default class Brush extends Tool {
 
    mouseMoveHandler(e) {
       if (this.mouseDown) {
-         const curCoords = this.getCoordsOnSvg(		// => { x, y }
+         const curCoords = this.getCoordsOnSvg(
+            // => { x, y }
             canvasState.svg,
             e.clientX,
             e.clientY
@@ -39,22 +39,23 @@ export default class Brush extends Tool {
          const lastTool = canvasState.canvasData.length - 1
 
          this.appendToBuffer(curCoords)
-			const pt = this.getAveragePoint(0)
+         const pt = this.getAveragePoint(0)
 
          if (pt) {
-				setTimeout(() => {	// добавляет плавный эффект задержки при рисовании
-					canvasState.addPoint(lastTool, pt)
-				}, 100)
-			}
+            setTimeout(() => {
+               // добавляет плавный эффект задержки при рисовании
+               canvasState.addPoint(lastTool, pt)
+            }, 100)
+         }
       }
    }
 
-	mouseUpHandler() {
-		this.mouseDown = false
-		this.buffer = []
+   mouseUpHandler() {
+      this.mouseDown = false
+      this.buffer = []
 
-		// canvasState.canvasSockets.stopDrawing()
-	}
+      // canvasState.canvasSockets.stopDrawing()
+   }
 
    appendToBuffer = function (pt) {
       this.buffer.push(pt)
@@ -85,16 +86,6 @@ export default class Brush extends Tool {
    }
 }
 
-
-
-
-
-
-
-
-
-
-
 // import Tool from "./Tool"
 
 // import canvasState from '../store/canvasState'
@@ -123,32 +114,10 @@ export default class Brush extends Tool {
 // 		}
 // 	}
 
-
 // 	// static draw({ x, y, ctx, strokeStyle, lineWidth }) {
 
 // 	// }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Более понятное получение координат
 // import Tool from "./Tool"
@@ -158,7 +127,7 @@ export default class Brush extends Tool {
 // export default class Brush extends Tool {
 // 	mouseDownHandler(e) {
 // 		this.mouseDown = true
-		
+
 //       const point = this.relativeCoordinatesForEvent(e)
 
 // 		canvasState.addDrawedTool({
@@ -175,7 +144,6 @@ export default class Brush extends Tool {
 // 			canvasState.addPoint(lastTool, point)
 // 		}
 // 	}
-
 
 // 	// static draw({ x, y, ctx, strokeStyle, lineWidth }) {
 

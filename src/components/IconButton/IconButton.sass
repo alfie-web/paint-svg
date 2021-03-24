@@ -1,0 +1,21 @@
+@import '../../styles/vars'
+	
+.IconButton
+	display: flex
+	margin: 0
+	padding: 0
+	border: none
+	background-color: transparent
+	cursor: pointer
+	outline: none
+
+	&:hover, &.active
+		svg
+			fill: $pink
+
+	svg
+		height: 24px 
+		max-width: 26px
+		width: auto
+		fill: $black
+		transition: fill .2s

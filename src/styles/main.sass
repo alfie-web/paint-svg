@@ -1,0 +1,90 @@
+@import "~reset-css"
+@import './vars'
+
+body
+	font: 18px $regular, sans-serif
+	color: $black
+	overflow-x: hidden
+	// background-color: #f6f6f6
+
+.container
+	width: 97%
+	max-width: 1286px
+	margin: 0 auto
+
+.App
+	// height: 100vh
+	// max-height: 100vh
+	// width: 100vw
+	// overflow-y: hidden
+	background-color: #f6f6f6
+
+.color
+	display: flex
+	border-radius: 4px
+	overflow: hidden
+
+h2, h3
+	display: block
+
+h2
+	font: 36px $regular
+
+h3
+	font: 24px $regular
+
+input[type="color"]
+	background-color: transparent
+	outline: none
+	border: none
+	cursor: pointer
+	box-shadow: none
+	border-radius: 4px
+	width: 24px
+	height: 24px
+	padding: 0
+	margin: 0
+	-webkit-appearance: none
+
+	&::-webkit-color-swatch-wrapper
+		padding: 0
+	
+	&::-webkit-color-swatch
+		border: none
+	
+
+.Page
+	min-height: 100vh
+
+.Input
+	position: relative
+
+	input
+		width: 100%
+		font: 18px $regular
+		border: 2px solid #e9eaf0
+		padding: 10px 20px
+		border-radius: 4px
+		box-sizing: border-box
+		transition: border-color .2s
+		outline: none
+		background-color: transparent
+
+		&::placeholder
+			color: $black
+			transition: color .2s
+
+		&:focus
+			border-color: $pink
+			// &::placeholder
+			// 	color: $gray
+
+	&__error
+		font: 14px $regular
+		color: $pink
+
+
+@media screen and ( max-width:  1024px)
+	.container
+		width: 90%
+	
