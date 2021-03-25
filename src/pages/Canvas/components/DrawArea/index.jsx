@@ -17,7 +17,7 @@ const ToolComponents = {
 
 const DrawArea = () => {
 	return (
-		<svg className="Canvas__drawArea">
+		<svg className="Canvas__drawArea" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve">
          {canvasState.canvasData.map((tool, index) => {
 				const Component = ToolComponents[tool.type]
 

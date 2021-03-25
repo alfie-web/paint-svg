@@ -1,26 +1,77 @@
 @import '../../../../styles/vars'
 
+.DownloadCanvas
+	opacity: 0
+	pointer-events: none
+	position: absolute
+	z-index: -10
+
 .ToolBar
-	display: flex
-	align-items: center
-	justify-content: space-between
-	position: fixed
-	top: 0
-	height: 50px
-	background-color: #fff
-	width: 100%
-	padding: 0 40px
-	box-sizing: border-box
-	border-bottom: 1px solid rgba(30, 36, 40, .03)
+	// display: flex
+	// align-items: center
+	// justify-content: space-between
+	// position: fixed
+	// top: 0
+	// height: 50px
+	// background-color: #fff
+	// width: 100%
+	// padding: 0 40px
+	// box-sizing: border-box
+	// border-bottom: 1px solid rgba(30, 36, 40, .03)
 	z-index: 150
 	cursor: auto
 
+	padding: 0
+	height: 100vh
+	background-color: transparent
+	pointer-events: none
+
+	.MenuVidget
+		position: absolute
+		top: 35px
+		left: 15px
+
 	&__buttons
 		display: flex
+		flex-direction: column
+		background-color: white
+		padding: 20px 15px
+		box-sizing: border-box
+		border-radius: 35px
+		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
 	
-	&__left, &__right
-		display: flex
-		align-items: center
+	// &__left, &__right
+	// 	display: flex
+	// 	align-items: center
+
+	&__left
+		pointer-events: auto
+		position: absolute
+		height: 100vh
+		left: 20px
+		top: 50%
+		transform: translateY(-50%)
+
+		.ToolBar__btn, .MenuVidget__btn
+			margin-right: 0px !important
+			margin-bottom: 20px !important
+
+		.ToolBar__btn
+			&:last-child
+				margin-bottom: 0 !important
+
+
+	&__right
+		pointer-events: auto
+		position: absolute
+		top: 20px
+		right: 20px
+
+		background-color: white
+		padding: 15px 20px
+		box-sizing: border-box
+		border-radius: 35px
+		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
 
 	&__middle
 		position: absolute
@@ -33,10 +84,6 @@
 			margin-right: 0 !important
 
 
-	.lastic
-		svg
-			height: 28px 
-
 	.Dropdown
 		a
 			color: $black
@@ -46,50 +93,162 @@
 
 
 
-@media only screen and ( max-width:  700px)
-	.ToolBar
-		padding: 0
-		height: 100vh
-		background-color: transparent
-		pointer-events: none
+// @media only screen and ( max-width:  700px)
+// 	.ToolBar
+// 		padding: 0
+// 		height: 100vh
+// 		background-color: transparent
+// 		pointer-events: none
 
-		.MenuVidget
-			position: absolute
-			top: 35px
-			left: 15px
+// 		.MenuVidget
+// 			position: absolute
+// 			top: 35px
+// 			left: 15px
 
-		&__buttons
-			flex-direction: column
-			background-color: white
-			padding: 20px 15px
-			box-sizing: border-box
-			border-radius: 35px
-			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
+// 		&__buttons
+// 			flex-direction: column
+// 			background-color: white
+// 			padding: 20px 15px
+// 			box-sizing: border-box
+// 			border-radius: 35px
+// 			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
 
-		&__left
-			pointer-events: auto
-			position: absolute
-			height: 100vh
-			left: 20px
-			top: 50%
-			transform: translateY(-50%)
+// 		&__left
+// 			pointer-events: auto
+// 			position: absolute
+// 			height: 100vh
+// 			left: 20px
+// 			top: 50%
+// 			transform: translateY(-50%)
 
-			.ToolBar__btn, .MenuVidget__btn
-				margin-right: 0px !important
-				margin-bottom: 20px !important
+// 			.ToolBar__btn, .MenuVidget__btn
+// 				margin-right: 0px !important
+// 				margin-bottom: 20px !important
 
-			.ToolBar__btn
-				&:last-child
-					margin-bottom: 0 !important
+// 			.ToolBar__btn
+// 				&:last-child
+// 					margin-bottom: 0 !important
 
-		&__right
-			pointer-events: auto
-			position: absolute
-			top: 20px
-			right: 20px
+// 		&__right
+// 			pointer-events: auto
+// 			position: absolute
+// 			top: 20px
+// 			right: 20px
 
-			background-color: white
-			padding: 15px 20px
-			box-sizing: border-box
-			border-radius: 35px
-			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
+// 			background-color: white
+// 			padding: 15px 20px
+// 			box-sizing: border-box
+// 			border-radius: 35px
+// 			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+// @import '../../../../styles/vars'
+
+// .ToolBar
+// 	display: flex
+// 	align-items: center
+// 	justify-content: space-between
+// 	position: fixed
+// 	top: 0
+// 	height: 50px
+// 	background-color: #fff
+// 	width: 100%
+// 	padding: 0 40px
+// 	box-sizing: border-box
+// 	border-bottom: 1px solid rgba(30, 36, 40, .03)
+// 	z-index: 150
+// 	cursor: auto
+
+// 	&__buttons
+// 		display: flex
+	
+// 	&__left, &__right
+// 		display: flex
+// 		align-items: center
+
+// 	&__middle
+// 		position: absolute
+// 		left: 50%
+// 		transform: translateX(-50%)
+
+// 	&__btn
+// 		margin-right: 20px !important
+// 		&:last-child
+// 			margin-right: 0 !important
+
+
+// 	.lastic
+// 		svg
+// 			height: 28px 
+
+// 	.Dropdown
+// 		a
+// 			color: $black
+// 			text-decoration: none
+
+
+
+
+
+// @media only screen and ( max-width:  700px)
+// 	.ToolBar
+// 		padding: 0
+// 		height: 100vh
+// 		background-color: transparent
+// 		pointer-events: none
+
+// 		.MenuVidget
+// 			position: absolute
+// 			top: 35px
+// 			left: 15px
+
+// 		&__buttons
+// 			flex-direction: column
+// 			background-color: white
+// 			padding: 20px 15px
+// 			box-sizing: border-box
+// 			border-radius: 35px
+// 			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
+
+// 		&__left
+// 			pointer-events: auto
+// 			position: absolute
+// 			height: 100vh
+// 			left: 20px
+// 			top: 50%
+// 			transform: translateY(-50%)
+
+// 			.ToolBar__btn, .MenuVidget__btn
+// 				margin-right: 0px !important
+// 				margin-bottom: 20px !important
+
+// 			.ToolBar__btn
+// 				&:last-child
+// 					margin-bottom: 0 !important
+
+// 		&__right
+// 			pointer-events: auto
+// 			position: absolute
+// 			top: 20px
+// 			right: 20px
+
+// 			background-color: white
+// 			padding: 15px 20px
+// 			box-sizing: border-box
+// 			border-radius: 35px
+// 			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important

@@ -40,7 +40,7 @@ class CanvasState {
 
 	setCanvas(canvas) {		// Экшен
 		this.canvas = canvas
-		this.svg = canvas.firstElementChild
+		this.svg = canvas.firstElementChild		// TODO: переделать ибо зависимость от верстки 
 	}
 
 	setRoomId(roomId) {

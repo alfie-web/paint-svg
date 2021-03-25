@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef } from 'react'
 
 import toolState from '../../../../store/toolState'
 import canvasState from '../../../../store/canvasState'
@@ -7,7 +7,6 @@ import Brush from '../../../../tools/Brush'
 import Rect from '../../../../tools/Rect'
 import Ellipse from '../../../../tools/Ellipse'
 import Line from '../../../../tools/Line'
-// import Eraser from '../../../../tools/Eraser'
 import Move from '../../../../tools/Move'
 
 import './ToolBar.sass'
@@ -18,6 +17,8 @@ import IconButton from '../../../../components/IconButton'
 
 
 const ToolBar = () => {
+	const downloadRef = useRef()
+
 	const checkActive = (Class) => {
 		return toolState.tool && toolState.tool instanceof Class
 	}
@@ -27,20 +28,66 @@ const ToolBar = () => {
 	// 	toolState.setFillColor(val)
 	// }
 
+	const download = () => {
+		var serializer = new XMLSerializer()
+		var source = serializer.serializeToString(canvasState.svg)
+
+		source = '<?xml version="1.0" standalone="no"?>\r\n' + source
+		var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source)
+
+		const a = document.createElement('a')
+		a.href = url
+		// const name = canvasState.canvasDoc.title ?? 'Название холста'
+		const name = 'Название холста'
+		a.download = `${name}.svg`
+		document.body.appendChild(a)
+		a.click()
+		document.body.removeChild(a)
+	}
+
+	// Сохранение в png
+	// function triggerDownload (imgURI) {
+	// 	var evt = new MouseEvent('click', {
+	// 		view: window,
+	// 		bubbles: false,
+	// 		cancelable: true
+	// 	});
+	
+	// 	var a = document.createElement('a');
+	// 	a.setAttribute('download', 'MY_COOL_IMAGE.png');
+	// 	a.setAttribute('href', imgURI);
+	// 	a.setAttribute('target', '_blank');
+	
+	// 	a.dispatchEvent(evt);
+	// }
+
 	// const download = () => {
-	// 	const dataUrl = canvasState.canvas.toDataURL()
-	// 	console.log(dataUrl)
-	// 	const a = document.createElement('a')
-	// 	a.href = dataUrl
-	// 	const name = canvasState.canvasDoc.title ?? 'Название холста'
-	// 	a.download = `${name}.jpg`
-	// 	document.body.appendChild(a)
-	// 	a.click()
-	// 	document.body.removeChild(a)
+	// 	var canvas = downloadRef.current;
+	// 	var ctx = canvas.getContext('2d');
+	// 	var data = (new XMLSerializer()).serializeToString(canvasState.svg);
+	// 	var DOMURL = window.URL || window.webkitURL || window;
+
+	// 	var img = new Image();
+	// 	var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+	// 	var url = DOMURL.createObjectURL(svgBlob);
+
+	// 	img.onload = function () {
+	// 		ctx.drawImage(img, 0, 0);
+	// 		DOMURL.revokeObjectURL(url);
+
+	// 		var imgURI = canvas
+	// 			.toDataURL('image/png')
+	// 			.replace('image/png', 'image/octet-stream');
+
+	// 		triggerDownload(imgURI);
+	// 	};
+
+	// 	img.src = url;
 	// }
 
 	return (
 		<div className="ToolBar">
+			<canvas className="DownloadCanvas" ref={downloadRef}></canvas>
 			<div className="ToolBar__left">
 				{/* <MenuVidget 
 				/> */}
@@ -147,7 +194,7 @@ const ToolBar = () => {
 					}
 				/> */}
 
-				{/* <IconButton 
+				<IconButton 
 					className="ToolBar__btn download"
 					onClick={download}
 					title="Скачать холст"
@@ -156,13 +203,7 @@ const ToolBar = () => {
 							<path fillRule="evenodd" clipRule="evenodd" d="M3.76923 2C2.77767 2 2 2.78767 2 3.72727V13.7859L7.32174 8.76645C7.86123 8.25834 8.57566 7.97797 9.31967 8.00135C10.0634 8.02473 10.7583 8.34861 11.2664 8.8874C11.2664 8.88742 11.2664 8.88738 11.2664 8.8874L16.2366 14.1501L17.5413 12.7661C17.5413 12.766 17.5412 12.7661 17.5413 12.7661C18.0379 12.2382 18.7143 11.9154 19.4416 11.8796C20.1693 11.8438 20.8741 12.0989 21.4183 12.5789L21.4194 12.5799L24 14.8631V3.72727C24 2.78766 23.2223 2 22.2308 2H3.76923ZM26 17.0784V3.72727C26 1.65442 24.298 0 22.2308 0H3.76923C1.70199 0 2.68221e-06 1.65442 2.68221e-06 3.72727V16.1016C-8.9407e-07 16.1032 -8.9407e-07 16.1047 2.68221e-06 16.1063V18.2727C2.68221e-06 20.3456 1.70199 22 3.76923 22H11.1514C11.1529 22 11.1544 22 11.1559 22H22.2308C24.298 22 26 20.3456 26 18.2727V17.0884C26 17.0851 26 17.0818 26 17.0784ZM24 17.5335L20.0952 14.0788C20.095 14.0786 20.0954 14.0789 20.0952 14.0788C19.931 13.9342 19.7324 13.8677 19.54 13.8771C19.3469 13.8866 19.1522 13.9726 18.998 14.1365L13.4707 20H22.2308C23.2223 20 24 19.2123 24 18.2727V17.5335ZM10.7222 20L14.8624 15.6079L9.81182 10.2601C9.65421 10.0929 9.45391 10.0066 9.25683 10.0004C9.06014 9.99418 8.85822 10.0669 8.69389 10.2215C8.69376 10.2216 8.69401 10.2214 8.69389 10.2215L2 16.5352V18.2727C2 19.2123 2.77767 20 3.76923 20H10.7222ZM17.5 6C17.2239 6 17 6.22386 17 6.5C17 6.77614 17.2239 7 17.5 7C17.7761 7 18 6.77614 18 6.5C18 6.22386 17.7761 6 17.5 6ZM15 6.5C15 5.11929 16.1193 4 17.5 4C18.8807 4 20 5.11929 20 6.5C20 7.88071 18.8807 9 17.5 9C16.1193 9 15 7.88071 15 6.5Z"/>
 						</svg>
 					}
-				/> */}
-
-				{/* <a href={canvasState.canvas.toDataURL()} download className="ToolBar__btn download">
-					<svg width="26" height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path fillRule="evenodd" clipRule="evenodd" d="M13 0.5C13.5523 0.5 14 0.947715 14 1.5V11.6751L17.3123 8.5372C17.7132 8.15737 18.3461 8.17448 18.726 8.57541C19.1058 8.97635 19.0887 9.60928 18.6877 9.98911L13.6877 14.726C13.302 15.0913 12.698 15.0913 12.3123 14.726L7.31226 9.98911C6.91132 9.60928 6.89422 8.97635 7.27405 8.57541C7.65388 8.17448 8.28681 8.15737 8.68774 8.5372L12 11.6751V1.5C12 0.947715 12.4477 0.5 13 0.5ZM1 11C1.55228 11 2 11.4477 2 12V17.6389C2 17.9326 2.13944 18.2623 2.47271 18.5384C2.8114 18.819 3.30485 19 3.85 19H22.15C22.6952 19 23.1886 18.819 23.5273 18.5384C23.8606 18.2623 24 17.9326 24 17.6389V12C24 11.4477 24.4477 11 25 11C25.5523 11 26 11.4477 26 12V17.6389C26 18.5976 25.5389 19.469 24.8032 20.0785C24.073 20.6835 23.1166 21 22.15 21H3.85C2.88342 21 1.92705 20.6835 1.19678 20.0785C0.461098 19.469 0 18.5976 0 17.6389V12C0 11.4477 0.447715 11 1 11Z" />
-					</svg>
-				</a> */}
+				/>
 			</div>
 		</div>
 	)

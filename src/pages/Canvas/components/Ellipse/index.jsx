@@ -12,7 +12,8 @@ const Ellipse = ({ tool }) => {
          cy={cy}
          rx={rx}
          ry={ry}
-         style={toJS(tool.settings)}
+         {...toJS(tool.settings)}
+         // style={toJS(tool.settings)}
       />
    )
 }

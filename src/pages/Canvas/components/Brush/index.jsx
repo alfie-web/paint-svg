@@ -14,7 +14,9 @@ const Brush = ({ tool }) => {
    return <path 
       className="path" 
       d={pathData} 
-      style={toJS(tool.settings)}
+      // style={toJS(tool.settings)}
+      {...toJS(tool.settings)}
+      fill="none"
    />
 }
 
