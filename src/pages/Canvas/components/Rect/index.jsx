@@ -12,7 +12,7 @@ const Rect = ({ tool }) => {
          y={y}
          width={w}
          height={h}
-         style={toJS(tool.styles)}
+         style={toJS(tool.settings)}
       />
    )
 }

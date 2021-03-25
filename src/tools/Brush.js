@@ -26,7 +26,7 @@ export default class Brush extends Tool {
       canvasState.addDrawedTool({
          type: 'Brush',
          points: [{ x: curCoords.x, y: curCoords.y }],
-         styles: {
+         settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth
          }
@@ -50,7 +50,7 @@ export default class Brush extends Tool {
             setTimeout(() => {
                // добавляет плавный эффект задержки при рисовании
                canvasState.addPoint(lastTool, pt)
-            }, 100)
+            }, 30)
          }
       }
    }

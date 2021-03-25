@@ -16,7 +16,7 @@ export default class Line extends Tool {
 		canvasState.addDrawedTool({
 			type: 'Line',
 			params: {},
-			styles: {
+			settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth
          }

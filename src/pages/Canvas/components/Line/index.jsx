@@ -12,7 +12,7 @@ const Line = ({ tool }) => {
          y1={y1}
          x2={x2}
          y2={y2}
-         style={toJS(tool.styles)}
+         style={toJS(tool.settings)}
       />
    )
 }

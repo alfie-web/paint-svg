@@ -10,6 +10,10 @@ const ColorPicker = ({ className, idAttr, onChange, label, title = '', value = '
 		onChange(val)
 	}
 
+	// useEffect(() => {
+	// 	setColor(value)
+	// }, [value])
+
 	return (
 		<>
 		{label && <label htmlFor={idAttr}>{label}</label> }

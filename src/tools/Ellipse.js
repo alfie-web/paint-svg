@@ -16,7 +16,7 @@ export default class Ellipse extends Tool {
 		canvasState.addDrawedTool({
 			type: 'Ellipse',
 			params: {},
-			styles: {
+			settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth,
 				fill: toolState.fill

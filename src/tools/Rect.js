@@ -16,7 +16,7 @@ export default class Rect extends Tool {
 		canvasState.addDrawedTool({
 			type: 'Rect',
 			params: {},
-			styles: {
+			settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth,
 				fill: toolState.fill
