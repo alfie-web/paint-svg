@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 
 import toolState from '../../../../store/toolState'
 import canvasState from '../../../../store/canvasState'
@@ -11,14 +10,12 @@ import Move from '../../../../tools/Move'
 
 import './ToolBar.sass'
 import { observer } from 'mobx-react-lite'
-// import MenuVidget from '../../../../components/MenuVidget'
+import MenuVidget from '../../../../components/MenuVidget'
 // import ColorPicker from '../../../../components/ColorPicker'
 import IconButton from '../../../../components/IconButton'
 
 
 const ToolBar = () => {
-	const downloadRef = useRef()
-
 	const checkActive = (Class) => {
 		return toolState.tool && toolState.tool instanceof Class
 	}
@@ -87,10 +84,8 @@ const ToolBar = () => {
 
 	return (
 		<div className="ToolBar">
-			<canvas className="DownloadCanvas" ref={downloadRef}></canvas>
 			<div className="ToolBar__left">
-				{/* <MenuVidget 
-				/> */}
+				<MenuVidget />
 
 				<div className="ToolBar__buttons">
 				
@@ -167,9 +162,9 @@ const ToolBar = () => {
 				</div>	
 			</div>
 
-			{/* {canvasState.canvasDoc.title && <div className="ToolBar__middle">
-				<p className="CanvasPage__title">{canvasState.canvasDoc.title}</p>
-			</div> } */}
+			{canvasState.canvasMeta.title && <div className="ToolBar__middle">
+				<p className="CanvasPage__title">{canvasState.canvasMeta.title}</p>
+			</div> }
 
 			<div className="ToolBar__right">
 				{/* <IconButton 

@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx"
-// import canvasAPI from '../api/canvas'
+import canvasAPI from '../api/canvas'
 // import loadImage from '../helpers/imageLoader'
 
 // import usersState from './usersState'
@@ -17,17 +17,12 @@ class CanvasState {
 
 	canvas = null	// холст для обработки mouseDown, mouseMove, mouseUp
 	svg = null	// svg элемент
-	canvasData = []	// Нарисованные инструменты тут 
+	canvasData = []	// Нарисованные фигуры тут 
 
 
-	// dummyCanvas = null
-	// context = null
-	// dummyContext = null
 	// undoList = []	// история действий 
 	// redoList = []	// отменённые действия
-	// canvasDoc = {}
-
-	// saved = ''
+	canvasMeta = {}	// мета данные о холсте
 	
 	constructor() {
 		makeAutoObservable(this)
@@ -38,9 +33,9 @@ class CanvasState {
 		toolState.setTool(new Tools.Brush(canvas))		// дефолтный выбранный инструмент
 	}
 
-	setCanvas(canvas) {		// Экшен
+	setCanvas(canvas) {		
 		this.canvas = canvas
-		this.svg = canvas.firstElementChild		// TODO: переделать ибо зависимость от верстки 
+		this.svg = canvas.querySelector('svg')	
 	}
 
 	setRoomId(roomId) {
@@ -69,18 +64,6 @@ class CanvasState {
 
 
 
-
-
-
-
-
-	// clearCanvas() {
-	// 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
-	// }
-
-	// setCanvasImage(img) {
-	// 	this.context.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
-	// }
 
 	// pushToUndo(data) {
 	// 	this.undoList.push(data)
@@ -128,32 +111,31 @@ class CanvasState {
 
 
 
-	// fetchState = async (canvasId, redirectIfError) => {
-	// 	this.isFetching = true
-	// 	try {
-	// 		const { data } = await canvasAPI.getById(canvasId)
+	fetchState = async (canvasId, redirectIfError) => {
+		this.isFetching = true
+		try {
+			const { data } = await canvasAPI.getById(canvasId)
 			
-	// 		this.canvasDoc = data.data
-	// 		this.canvas.width = data.data.width
-	// 		this.canvas.height = data.data.height
-	// 		this.dummyCanvas.width = data.data.width
-	// 		this.dummyCanvas.height = data.data.height
+			this.canvasMeta = {
+				title: data.data.title
+			}
 
-	// 		this.context.fillStyle = "white"
-	// 		this.context.fillRect(0, 0, data.data.width, data.data.height)
+			// console.log(this.svg.width)
+			this.svg.setAttribute('width', data.data.width)
+			this.svg.setAttribute('height', data.data.height)
 
-	// 		this.redo(data.data.content)
-	// 		this.setRoomId(canvasId)
-	// 		this.startSocketListeners(canvasId)			
+			// this.redo(data.data.content)
+			this.setRoomId(canvasId)
+			// this.startSocketListeners(canvasId)			
 
-	// 	} catch (e) {
-	// 		console.log(e)
+		} catch (e) {
+			console.log(e)
 
-	// 		redirectIfError()
-	// 	} finally {
-	// 		this.isFetching = false
-	// 	}
-	// }
+			redirectIfError()
+		} finally {
+			this.isFetching = false
+		}
+	}
 
 	// startSocketListeners = (id) => {
 	// 	this.canvasSockets = new CanvasSockets()
