@@ -1,12 +1,20 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 
 const Ellipse = ({ tool }) => {
    const { cx, cy, rx, ry } = tool.params
-   
-   return <ellipse className="ellipse" cx={cx} cy={cy} rx={rx} ry={ry} />
-   // return <ellipse className="ellipse" cx = "120" cy = "50" rx = "100" ry = "50" />
+
+   return (
+      <ellipse
+         className="ellipse"
+         cx={cx}
+         cy={cy}
+         rx={rx}
+         ry={ry}
+         style={toJS(tool.styles)}
+      />
+   )
 }
 
 export default observer(Ellipse)
-

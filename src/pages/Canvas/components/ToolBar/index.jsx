@@ -12,8 +12,8 @@ import Move from '../../../../tools/Move'
 
 import './ToolBar.sass'
 import { observer } from 'mobx-react-lite'
-// import ColorPicker from '../../../../components/ColorPicker'
 // import MenuVidget from '../../../../components/MenuVidget'
+import ColorPicker from '../../../../components/ColorPicker'
 import IconButton from '../../../../components/IconButton'
 
 
@@ -22,10 +22,10 @@ const ToolBar = observer(() => {
 		return toolState.tool && toolState.tool instanceof Class
 	}
 
-	// const changeColor = val => {
-	// 	toolState.setStrokeColor(val)
-	// 	toolState.setFillColor(val)
-	// }
+	const changeColor = val => {
+		toolState.setStrokeColor(val)
+		// toolState.setFillColor(val)
+	}
 
 	// const download = () => {
 	// 	const dataUrl = canvasState.canvas.toDataURL()
@@ -111,13 +111,13 @@ const ToolBar = observer(() => {
 
 				{/* TODO: Синхронизовать его со стейтом */}
 
-				{/* <ColorPicker 
-					title="Цвет заливки и обводки"
-					className="ToolBar__btn color"
-					onChange={changeColor}
-					// value="#cccccc"
-				/> */}
-					</div>	
+					<ColorPicker 
+						title="Цвет заливки и обводки"
+						className="ToolBar__btn color"
+						onChange={changeColor}
+						// value="#cccccc"
+					/>
+				</div>	
 			</div>
 
 			{/* {canvasState.canvasDoc.title && <div className="ToolBar__middle">

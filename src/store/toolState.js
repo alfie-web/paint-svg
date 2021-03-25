@@ -2,9 +2,9 @@ import { makeAutoObservable } from "mobx"
 
 class ToolState {
 	tool = null
-	fillStyle = '#000000'
-	strokeStyle = '#000000'
-	lineWidth = 1
+	fill = 'transparent'
+	stroke = '#000000'
+	lineWidth = 2
 
 	constructor() {
 		makeAutoObservable(this)
@@ -15,13 +15,13 @@ class ToolState {
 	}
 
 	setFillColor(color) {		// Экшен
-	// 	this.tool.fillStyle = color		// используем setter ооп
-		this.fillStyle = color
+	// 	this.tool.fill = color		// используем setter ооп
+		this.fill = color
 	}
 
 	setStrokeColor(color) {		// Экшен
-		// this.tool.strokeStyle = color		// используем setter ооп
-		this.strokeStyle = color
+		// this.tool.stroke = color		// используем setter ооп
+		this.stroke = color
 	}
 
 	setLineWidth(width) {		// Экшен

@@ -1,6 +1,7 @@
 import Tool from './Tool'
 
 import canvasState from '../store/canvasState'
+import toolState from '../store/toolState'
 
 // TODO:
 // переименовать в Pen
@@ -25,6 +26,10 @@ export default class Brush extends Tool {
       canvasState.addDrawedTool({
          type: 'Brush',
          points: [{ x: curCoords.x, y: curCoords.y }],
+         styles: {
+            stroke: toolState.stroke,
+            strokeWidth: toolState.lineWidth
+         }
       })
    }
 

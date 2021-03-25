@@ -2,6 +2,7 @@
 import Tool from "./Tool"
 
 import canvasState from '../store/canvasState'
+import toolState from "../store/toolState"
 
 export default class Ellipse extends Tool {
 	start = null
@@ -14,7 +15,12 @@ export default class Ellipse extends Tool {
 
 		canvasState.addDrawedTool({
 			type: 'Ellipse',
-			params: {}
+			params: {},
+			styles: {
+            stroke: toolState.stroke,
+            strokeWidth: toolState.lineWidth,
+				fill: toolState.fill
+         }
 		})
 	}
 

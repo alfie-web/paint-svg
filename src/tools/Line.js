@@ -2,6 +2,7 @@
 import Tool from "./Tool"
 
 import canvasState from '../store/canvasState'
+import toolState from "../store/toolState"
 
 export default class Line extends Tool {
 	start = null
@@ -14,7 +15,11 @@ export default class Line extends Tool {
 
 		canvasState.addDrawedTool({
 			type: 'Line',
-			params: {}
+			params: {},
+			styles: {
+            stroke: toolState.stroke,
+            strokeWidth: toolState.lineWidth
+         }
 		})
 	}
 

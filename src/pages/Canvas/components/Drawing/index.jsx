@@ -14,7 +14,7 @@ const Drawing = () => {
    return (
       <div className="Canvas">
          <div
-            className="drawArea Canvas__element"
+            className="Canvas__element"
             ref={drawAreaRef}
          >
             <DrawArea />
