@@ -1,0 +1,57 @@
+@import '../../styles/vars'
+
+.Canvases
+	padding: 80px 0 
+	box-sizing: border-box
+
+	&__list
+		display: flex
+		flex-wrap: wrap
+		margin: 20px -10px 0
+
+	&__item
+		$item: &
+		width: calc(100% / 3 - 20px)
+		margin: 0 10px 40px
+		a
+			text-decoration: none !important
+
+		&:hover
+			#{$item}-title
+				color: $pink
+			#{$item}-usersCount
+				color: $black
+
+			#{$item}-img
+				transform: translateY(8px)
+
+		&-img
+			display: flex
+			background-color: #fff
+			margin-bottom: 20px
+			transition: transform .2s
+
+
+		img
+			width: 100%
+			height: auto
+
+		&-title
+			color: $black
+			transition: color .2s
+
+		&-usersCount
+			font: 18px $regular
+			color: $gray
+			transition: color .2s
+
+
+@media only screen and (max-width: 920px)
+	.Canvases	
+		&__item
+			width: calc(50% - 20px)
+
+@media only screen and (max-width: 768px)
+	.Canvases	
+		&__item
+			width: calc(100% - 20px)
