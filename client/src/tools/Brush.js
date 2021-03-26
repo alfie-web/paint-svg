@@ -51,10 +51,7 @@ export default class Brush extends Tool {
       this.mouseDown = false
       this.buffer = []
 
-      // console.log(toJS(canvasState.canvasData))
-      // canvasState.canvasSockets.stopDrawing()
-
-      canvasState.drawToOther(this.toolId)
+      // canvasState.drawToOther(this.toolId)
    }
 
    draw(toolId, curCoords) {
@@ -66,6 +63,8 @@ export default class Brush extends Tool {
       if (pt && typeof lastToolIndex === 'number') {
          setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
             canvasState.addPoint(lastToolIndex, pt)
+
+            canvasState.drawToOther(lastToolIndex, pt)
          }, 20)
       }
    }

@@ -28,7 +28,10 @@ export default class Line extends Tool {
 			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 			const lineParams = this.drawLine(e)
 
-			if (typeof lastToolIndex === 'number') canvasState.draw(lastToolIndex, lineParams)
+			if (typeof lastToolIndex === 'number') {
+				canvasState.draw(lastToolIndex, lineParams)
+				canvasState.drawToOther(lastToolIndex, lineParams)
+			}
 		}
 	}
 

@@ -93,17 +93,30 @@ module.exports = (httpServer) => {
          socket.leave(roomId)
       })
 
-      // обрабатывает действия на холсте
-      socket.on('BE-draw', (state) => {
+       // обрабатывает действия на холсте
+       socket.on('BE-start-drawing', (state) => {
          const { roomId, userId, tool } = JSON.parse(state)
          // Надо найти пользователя, кто отпправляет данные
 
-         socket.broadcast.to(roomId).emit('FE-draw', { tool })
+         socket.broadcast.to(roomId).emit('FE-start-drawing', { tool })
       })
 
-      socket.on('BE-stop-drawing', (state) => {
-         const { roomId, userId } = JSON.parse(state)
-         socket.broadcast.to(roomId).emit('FE-stop-drawing')
+      socket.on('BE-drawing', (state) => {
+         const { roomId, userId, toolId, params } = JSON.parse(state)
+         socket.broadcast.to(roomId).emit('FE-drawing', { toolId, params })
       })
+
+      // // обрабатывает действия на холсте
+      // socket.on('BE-draw', (state) => {
+      //    const { roomId, userId, tool } = JSON.parse(state)
+      //    // Надо найти пользователя, кто отпправляет данные
+
+      //    socket.broadcast.to(roomId).emit('FE-draw', { tool })
+      // })
+
+      // socket.on('BE-stop-drawing', (state) => {
+      //    const { roomId, userId } = JSON.parse(state)
+      //    socket.broadcast.to(roomId).emit('FE-stop-drawing')
+      // })
    })
 }

@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction, toJS } from 'mobx'
 import { nanoid } from 'nanoid'
 import canvasAPI from '../api/canvas'
-// import loadImage from '../helpers/imageLoader'
 
 import usersState from './usersState'
 import toolState from './toolState'
@@ -53,7 +52,7 @@ class CanvasState {
 			this.canvasData.push(toolData)
 		})
 
-		// this.canvasSockets.startDrawing(toolData)
+		this.canvasSockets.startDrawing(toolData)
 
 		return toolData.id
 	}
@@ -77,53 +76,18 @@ class CanvasState {
 	}
 
 	// А можно будет попробовать эту логику в addPoint и draw сделать
-	drawToOther(toolId) {
-      const lastToolIndex = this.getToolIndexById(toolId)
-      this.canvasSockets.draw(toJS(this.canvasData[lastToolIndex]))
+	// drawToOther(toolId) {
+   //    const lastToolIndex = this.getToolIndexById(toolId)
+   //    this.canvasSockets.draw(toJS(this.canvasData[lastToolIndex]))
+	// }
+
+
+
+
+	drawToOther(index, params) {
+		const tool = toJS(this.canvasData[index])
+      this.canvasSockets.drawing(tool.id, params)
 	}
-
-
-
-	// pushToUndo(data) {
-	// 	this.undoList.push(data)
-	// }
-
-	// pushToRedo(data) {
-	// 	this.redoList.push(data)
-	// }
-
-	// // TODO: Порефакторить метод undo и redo
-	// undo() {
-	// 	if (this.undoList.length > 0) {
-	// 		let dataUrl = this.undoList.pop()	
-	// 		this.redoList.push(this.canvas.toDataURL())	// Сохранаем текушее состояние канваса чтобы отменить возврат 
-
-	// 		loadImage(dataUrl)
-	// 			.then(({ img }) => {
-	// 				this.clearCanvas()
-	// 				this.setCanvasImage(img)
-	// 			})
-	// 	} else {
-	// 		this.clearCanvas()
-	// 	}
-	// }
-
-	// redo(image) {
-	// 	if (this.redoList.length > 0 || image) {
-	// 		let dataUrl = this.redoList.pop()	
-	// 		this.undoList.push(image ? image : this.canvas.toDataURL())	
-
-	// 		loadImage(image ? image : dataUrl)
-	// 			.then(({ img }) => {
-	// 				this.clearCanvas()
-	// 				this.setCanvasImage(img)
-	// 			})
-	// 	}
-	// }
-
-
-
-
 
 
 
@@ -193,32 +157,40 @@ class CanvasState {
 		console.log('Ошибка соединения', error)
 		window.location.href = '/canvases'
 	}
-	
-	onDraw = ({ tool }) => {
+
+	onStartDrawing = ({ tool }) => {
 		runInAction(() => {
 			this.canvasData.push(tool)
 		})
-
-		// Tools[tool.type].draw(tool)
-		// this.saved = this.canvas.toDataURL()
 	}
 
+	onDrawing = ({ toolId, params }) => {
+		// Находим элемент
+		const lastToolIndex = this.getToolIndexById(toolId)
+      const findedTool = toJS(this.canvasData[lastToolIndex])
 
+		if (findedTool) {
+			if (findedTool.type === 'Brush') {
+				this.addPoint(lastToolIndex, params)
+			} else {
+				this.draw(lastToolIndex, params)
+			}
+		}
 
+		// Если есть, то в зависимости от типа делаем либо addPoint либо draw
+	}
+	
 	// onDraw = ({ tool }) => {
-	// 	Tools[tool.type].draw(tool)
-	// 	this.saved = this.canvas.toDataURL()
+	// 	runInAction(() => {
+	// 		this.canvasData.push(tool)
+	// 	})
+
+	// 	// Tools[tool.type].draw(tool)
 	// }
 
+
 	// onStopDrawing = () => {
-	// 	this.context.beginPath()
 
-	// 	console.log('onStopDrawing')
-
-	// 	// TODO: Вынести в отдельную функцию
-	// 	this.context.strokeStyle = toolState.strokeStyle
-	// 	this.context.fillStyle = toolState.fillStyle
-	// 	this.context.lineWidth = toolState.lineWidth
 	// }
 }
 

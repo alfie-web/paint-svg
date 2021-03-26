@@ -29,7 +29,10 @@ export default class Rect extends Tool {
 			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 			const rectParams = this.drawRect(e)
 
-			if (typeof lastToolIndex === 'number') canvasState.draw(lastToolIndex, rectParams)
+			if (typeof lastToolIndex === 'number') {
+				canvasState.draw(lastToolIndex, rectParams)
+				canvasState.drawToOther(lastToolIndex, rectParams)
+			}
 		}
 	}
 

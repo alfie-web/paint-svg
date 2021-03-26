@@ -18,8 +18,11 @@ class CanvasSockets {
       this.socket.on('FE-user-leave', canvasState.onUserLeave)
       this.socket.on('FE-room-error', canvasState.onRoomError)
 
-      this.socket.on('FE-draw', canvasState.onDraw)
-      this.socket.on('FE-stop-drawing', canvasState.onStopDrawing)
+      this.socket.on('FE-start-drawing', canvasState.onStartDrawing)
+      this.socket.on('FE-drawing', canvasState.onDrawing)
+
+      // this.socket.on('FE-draw', canvasState.onDraw)
+      // this.socket.on('FE-stop-drawing', canvasState.onStopDrawing)
    }
 
    joinRoom = ({ roomId, userId, userName, userAvatar }) => {
@@ -34,35 +37,32 @@ class CanvasSockets {
       this.socket.disconnect()
    }
 
-   // startDrawing = (tool) => {
-   //    this.socket.emit('BE-start-drawing', JSON.stringify({
-   //       roomId: canvasState.roomId,
-   //       userId: usersState.user._id,
-   //       tool,
-   //    }))
-   // }
 
-   // drawing = (params) => {
-      
-   // }
 
-   draw = (tool) => {
-      this.socket.emit(
-         'BE-draw',
-         JSON.stringify({
-            roomId: canvasState.roomId,
-            userId: usersState.user._id,
-            tool,
-         })
-      )
+   startDrawing = (tool) => {
+      this.socket.emit('BE-start-drawing', JSON.stringify({
+         roomId: canvasState.roomId,
+         userId: usersState.user._id,
+         tool,
+      }))
    }
 
-   // stopDrawing = () => {
+   drawing = (toolId, params) => {
+      this.socket.emit('BE-drawing', JSON.stringify({
+         roomId: canvasState.roomId,
+         userId: usersState.user._id,
+         toolId,
+         params
+      }))
+   }
+
+   // draw = (tool) => {
    //    this.socket.emit(
-   //       'BE-stop-drawing',
+   //       'BE-draw',
    //       JSON.stringify({
    //          roomId: canvasState.roomId,
    //          userId: usersState.user._id,
+   //          tool,
    //       })
    //    )
    // }

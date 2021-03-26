@@ -29,7 +29,10 @@ export default class Ellipse extends Tool {
 			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 			const ellipseParams = this.drawEllipse(e)
 
-			if (typeof lastToolIndex === 'number') canvasState.draw(lastToolIndex, ellipseParams)
+			if (typeof lastToolIndex === 'number') {
+				canvasState.draw(lastToolIndex, ellipseParams)
+				canvasState.drawToOther(lastToolIndex, ellipseParams)
+			}
 		}
 	}
 
