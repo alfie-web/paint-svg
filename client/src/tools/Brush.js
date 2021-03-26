@@ -2,8 +2,6 @@ import Tool from './Tool'
 
 import canvasState from '../store/canvasState'
 import toolState from '../store/toolState'
-import { toJS } from 'mobx'
-
 
 // TODO:
 // переименовать в Pen
@@ -68,7 +66,7 @@ export default class Brush extends Tool {
       if (pt && typeof lastToolIndex === 'number') {
          setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
             canvasState.addPoint(lastToolIndex, pt)
-         }, 30)
+         }, 20)
       }
    }
 

@@ -9,8 +9,10 @@ const CanvasList = ({ items }) => {
                key={canvas._id}
                _id={canvas._id}
                title={canvas.title}
-               content={canvas.content}
+               // content={canvas.content}
                usersCount={canvas.users.length}
+               width={canvas.width}
+               height={canvas.height}
             />
          ))}
       </div>

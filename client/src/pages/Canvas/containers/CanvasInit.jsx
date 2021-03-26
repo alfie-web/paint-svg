@@ -10,6 +10,8 @@ const CanvasInit = () => {
    const { id } = useParams()
    const history = useHistory()
 
+   
+
    useEffect(() => {
       if (!id) return history.push('/canvases')
 

@@ -12,9 +12,13 @@
 	&__item
 		$item: &
 		width: calc(100% / 3 - 20px)
+		min-height: 200px
 		margin: 0 10px 40px
-		a
-			text-decoration: none !important
+		background-color: #fff
+		padding: 20px 30px
+		box-sizing: border-box
+		position: relative
+		text-decoration: none !important
 
 		&:hover
 			#{$item}-title
@@ -44,6 +48,50 @@
 			font: 18px $regular
 			color: $gray
 			transition: color .2s
+
+		&-size
+			position: absolute
+			bottom: 20px
+			left: 30px
+			font: 18px $regular
+			color: $gray
+			transition: color .2s
+
+	// &__item
+	// 	$item: &
+	// 	width: calc(100% / 3 - 20px)
+	// 	margin: 0 10px 40px
+	// 	a
+	// 		text-decoration: none !important
+
+	// 	&:hover
+	// 		#{$item}-title
+	// 			color: $pink
+	// 		#{$item}-usersCount
+	// 			color: $black
+
+	// 		#{$item}-img
+	// 			transform: translateY(8px)
+
+	// 	&-img
+	// 		display: flex
+	// 		background-color: #fff
+	// 		margin-bottom: 20px
+	// 		transition: transform .2s
+
+
+	// 	img
+	// 		width: 100%
+	// 		height: auto
+
+	// 	&-title
+	// 		color: $black
+	// 		transition: color .2s
+
+	// 	&-usersCount
+	// 		font: 18px $regular
+	// 		color: $gray
+	// 		transition: color .2s
 
 
 @media only screen and (max-width: 920px)
