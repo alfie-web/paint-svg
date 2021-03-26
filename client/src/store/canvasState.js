@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable, runInAction, toJS } from 'mobx'
 import { nanoid } from 'nanoid'
 import canvasAPI from '../api/canvas'
 // import loadImage from '../helpers/imageLoader'
@@ -53,6 +53,8 @@ class CanvasState {
 			this.canvasData.push(toolData)
 		})
 
+		// this.canvasSockets.startDrawing(toolData)
+
 		return toolData.id
 	}
 
@@ -74,6 +76,11 @@ class CanvasState {
 		})
 	}
 
+	// А можно будет попробовать эту логику в addPoint и draw сделать
+	drawToOther(toolId) {
+      const lastToolIndex = this.getToolIndexById(toolId)
+      this.canvasSockets.draw(toJS(this.canvasData[lastToolIndex]))
+	}
 
 
 
@@ -186,14 +193,20 @@ class CanvasState {
 		console.log('Ошибка соединения', error)
 		window.location.href = '/canvases'
 	}
+	
+	onDraw = ({ tool }) => {
+		runInAction(() => {
+			this.canvasData.push(tool)
+		})
+
+		// Tools[tool.type].draw(tool)
+		// this.saved = this.canvas.toDataURL()
+	}
+
+
 
 	// onDraw = ({ tool }) => {
-	// 	Tools[tool.type].draw({
-	// 		ctx: this.context,
-	// 		saved: this.canvas.toDataURL(),
-	// 		...tool,
-	// 		clear: true
-	// 	})
+	// 	Tools[tool.type].draw(tool)
 	// 	this.saved = this.canvas.toDataURL()
 	// }
 

@@ -34,6 +34,18 @@ class CanvasSockets {
       this.socket.disconnect()
    }
 
+   // startDrawing = (tool) => {
+   //    this.socket.emit('BE-start-drawing', JSON.stringify({
+   //       roomId: canvasState.roomId,
+   //       userId: usersState.user._id,
+   //       tool,
+   //    }))
+   // }
+
+   // drawing = (params) => {
+      
+   // }
+
    draw = (tool) => {
       this.socket.emit(
          'BE-draw',
@@ -45,15 +57,15 @@ class CanvasSockets {
       )
    }
 
-   stopDrawing = () => {
-      this.socket.emit(
-         'BE-stop-drawing',
-         JSON.stringify({
-            roomId: canvasState.roomId,
-            userId: usersState.user._id,
-         })
-      )
-   }
+   // stopDrawing = () => {
+   //    this.socket.emit(
+   //       'BE-stop-drawing',
+   //       JSON.stringify({
+   //          roomId: canvasState.roomId,
+   //          userId: usersState.user._id,
+   //       })
+   //    )
+   // }
 }
 
 export default CanvasSockets

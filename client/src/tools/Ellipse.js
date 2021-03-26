@@ -34,7 +34,7 @@ export default class Ellipse extends Tool {
 	}
 
 
-	// static draw({ x, y, ctx, strokeStyle, lineWidth }) {
+	// draw({ x, y, ctx, strokeStyle, lineWidth }) {
 
 	// }
 

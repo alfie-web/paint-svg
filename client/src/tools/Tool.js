@@ -1,4 +1,5 @@
 // import throttle from "../helpers/throttle"
+import { toJS } from "mobx"
 import canvasState from "../store/canvasState"
 
 export default class Tool {
@@ -54,6 +55,8 @@ export default class Tool {
 
 		// this.ctx.beginPath()
 		// canvasState.canvasSockets.stopDrawing()
+
+		canvasState.drawToOther(this.toolId)
 	}
 
 	// getCoords(e) {

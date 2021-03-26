@@ -2,8 +2,8 @@ import Tool from './Tool'
 
 import canvasState from '../store/canvasState'
 import toolState from '../store/toolState'
+import { toJS } from 'mobx'
 
-// import { toJS } from 'mobx'
 
 // TODO:
 // переименовать в Pen
@@ -25,14 +25,16 @@ export default class Brush extends Tool {
 
       this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
 
-      this.toolId = canvasState.addDrawedTool({
+      const tool = {
          type: 'Brush',
          points: [{ x: curCoords.x, y: curCoords.y }],
          settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth
          }
-      })
+      }
+
+      this.toolId = canvasState.addDrawedTool(tool)
    }
 
    mouseMoveHandler(e) {
@@ -43,16 +45,7 @@ export default class Brush extends Tool {
             e.clientY
          )
 
-         const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-
-         this.appendToBuffer(curCoords)
-         const pt = this.getAveragePoint(0)
-
-         if (pt && typeof lastToolIndex === 'number') {
-            setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
-               canvasState.addPoint(lastToolIndex, pt)
-            }, 30)
-         }
+         this.draw(this.toolId, curCoords)
       }
    }
 
@@ -62,6 +55,21 @@ export default class Brush extends Tool {
 
       // console.log(toJS(canvasState.canvasData))
       // canvasState.canvasSockets.stopDrawing()
+
+      canvasState.drawToOther(this.toolId)
+   }
+
+   draw(toolId, curCoords) {
+      const lastToolIndex = canvasState.getToolIndexById(toolId)
+
+      this.appendToBuffer(curCoords)
+      const pt = this.getAveragePoint(0)
+
+      if (pt && typeof lastToolIndex === 'number') {
+         setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
+            canvasState.addPoint(lastToolIndex, pt)
+         }, 30)
+      }
    }
 
    appendToBuffer = function (pt) {
