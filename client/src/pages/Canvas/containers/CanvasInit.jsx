@@ -19,9 +19,9 @@ const CanvasInit = () => {
 
       canvasState.fetchState(id, redirectIfError)
 
-      // return () => {
-      //    canvasState.canvasSockets.leaveRoom(id)
-      // }
+      return () => {
+         canvasState.canvasSockets.leaveRoom(id)
+      }
    }, [id, history])
 
    return <Drawing />

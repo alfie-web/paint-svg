@@ -1,7 +1,7 @@
 import React from 'react'
 
 import toolState from '../../../../store/toolState'
-// import ConnectedUsers from './components/ConnectedUsers'
+import ConnectedUsers from './components/ConnectedUsers'
 import ColorPicker from '../../../../components/ColorPicker'
 
 import './SettingsBar.sass'
@@ -46,7 +46,9 @@ const SettingsBar = () => {
             </div>
          </div>
 
-         <div className="SettingBar__right">{/* <ConnectedUsers /> */}</div>
+         <div className="SettingBar__right">
+            <ConnectedUsers />
+         </div>
       </div>
    )
 }

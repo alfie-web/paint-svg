@@ -3,11 +3,11 @@ import { nanoid } from 'nanoid'
 import canvasAPI from '../api/canvas'
 // import loadImage from '../helpers/imageLoader'
 
-// import usersState from './usersState'
+import usersState from './usersState'
 import toolState from './toolState'
 
 
-// import CanvasSockets from '../api/canvasSockets'
+import CanvasSockets from '../api/canvasSockets'
 import Tools from '../tools'
 
 class CanvasState {
@@ -140,7 +140,7 @@ class CanvasState {
 
 			// this.redo(data.data.content)
 			this.setRoomId(canvasId)
-			// this.startSocketListeners(canvasId)			
+			this.startSocketListeners(canvasId)			
 
 		} catch (e) {
 			console.log(e)
@@ -151,41 +151,41 @@ class CanvasState {
 		}
 	}
 
-	// startSocketListeners = (id) => {
-	// 	this.canvasSockets = new CanvasSockets()
+	startSocketListeners = (id) => {
+		this.canvasSockets = new CanvasSockets()
 
-	// 	this.canvasSockets.startSocketListeners({
-	// 		roomId: id,
-	// 		userId: usersState.user._id,
-	// 		userName: usersState.user.fullname, 
-	// 		userAvatar: usersState.user.avatar
-	// 	})
-	// }
+		this.canvasSockets.startSocketListeners({
+			roomId: id,
+			userId: usersState.user._id,
+			userName: usersState.user.fullname, 
+			userAvatar: usersState.user.avatar
+		})
+	}
 
-	// // Срабатывает, когда текущий пользователь заходит в комнату	(получаем тех кто уже в комнате)
-	// onRoomUsers = users => {	
-	// 	console.log('Пользователи в комнате', users)
-	// 	this.users = users
-	// }
+	// Срабатывает, когда текущий пользователь заходит в комнату	(получаем тех кто уже в комнате)
+	onRoomUsers = users => {	
+		console.log('Пользователи в комнате', users)
+		this.users = users
+	}
 
-	// // Срабатывает, когда тукущий пользователь уже в комнате и в неё вошел другой пользователь
-	// onUserJoin = (user) => {	
-	// 	console.log('Новый пользователь', user)
-	// 	window.flash(`${user.userName} тут!`, 'info', 'bottom-right')
-	// 	this.users.push(user)
-	// }
+	// Срабатывает, когда тукущий пользователь уже в комнате и в неё вошел другой пользователь
+	onUserJoin = (user) => {	
+		console.log('Новый пользователь', user)
+		window.flash(`${user.userName} тут!`, 'info', 'bottom-right')
+		this.users.push(user)
+	}
 
-	// // Срабатывает, когда пользователь вышел из комнаты (перешел на другой роут) или закрыл вкладку браузера (или пропал интернет)
-	// onUserLeave = user => {		
-	// 	console.log('Пользователь покинул комнату', user)
-	// 	window.flash(`${user.userName} ушёл!`, 'info', 'bottom-right')
-	// 	this.users = this.users.filter(u => u.userId !== user.userId)
-	// }
+	// Срабатывает, когда пользователь вышел из комнаты (перешел на другой роут) или закрыл вкладку браузера (или пропал интернет)
+	onUserLeave = user => {		
+		console.log('Пользователь покинул комнату', user)
+		window.flash(`${user.userName} ушёл!`, 'info', 'bottom-right')
+		this.users = this.users.filter(u => u.userId !== user.userId)
+	}
 
-	// onRoomError = error => {
-	// 	console.log('Ошибка соединения', error)
-	// 	window.location.href = '/canvases'
-	// }
+	onRoomError = error => {
+		console.log('Ошибка соединения', error)
+		window.location.href = '/canvases'
+	}
 
 	// onDraw = ({ tool }) => {
 	// 	Tools[tool.type].draw({

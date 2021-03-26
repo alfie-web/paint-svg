@@ -1,18 +1,7 @@
 @import '../../../../styles/vars'
 
 .SettingBar
-	// display: flex
-	// align-items: center
-	// justify-content: space-between
-	// height: 50px
-	// background-color: #fff
-	// width: 100%
-	// position: fixed
-	// top: 50px
 	z-index: 120
-	// box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03)
-	// padding: 0 40px
-	// box-sizing: border-box
 	cursor: auto
 
 	background-color: transparent
@@ -31,7 +20,6 @@
 	&__left
 		justify-content: center
 		bottom: 20px
-		// width: 100%
 		left: 50%
 		transform: translateX(-50%)
 
@@ -46,6 +34,8 @@
 
 	&__right
 		right: 20px
+		top: 50%
+		transform: translateY(-50%)
 
 	&__option
 		display: flex
@@ -59,14 +49,12 @@
 
 	&__users
 		display: flex
-		flex-direction: row-reverse
+		flex-direction: column-reverse
 
 		.Avatar 
-			margin-left: -10px
+			margin-top: -10px
 			&:last-child
-				margin-left: 0
-
-
+				margin-top: 0
 
 	input[type="number"], .color
 		margin-left: 10px
@@ -83,176 +71,9 @@
 		outline: none
 		&:focus
 			border-color: $pink
-			// outline-color: $pink
-
-
 
 
 @media only screen and ( max-width:  700px)
-	// .SettingBar
-	// 	background-color: transparent
-	// 	box-shadow: none
-	// 	height: 100vh
-	// 	top: 0
-	// 	padding: 0
-	// 	pointer-events: none
-
-	// 	&__users
-	// 		flex-direction: column-reverse
-	// 		.Avatar 
-	// 			margin-top: -10px
-	// 			margin-left: 0
-	// 			&:last-child
-	// 				margin-top: 0
-
-	// 	&__left, &__right
-	// 		pointer-events: auto
-	// 		position: absolute
-
-
-	// 	&__left
-	// 		display: flex
-	// 		justify-content: center
-	// 		bottom: 20px
-	// 		// width: 100%
-	// 		position: absolute
-	// 		left: 50%
-	// 		transform: translateX(-50%)
-
-	// 		background-color: white
-	// 		padding: 15px 20px
-	// 		box-sizing: border-box
-	// 		border-radius: 35px
-	// 		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
-
-	// 		.ColorPicker, input
-	// 			margin-left: 0 !important
-
-	// 	&__right
-	// 		right: 20px
-
 	.SettingBar__option
 		label
 			display: none
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// @import '../../../../styles/vars'
-
-// .SettingBar
-// 	display: flex
-// 	align-items: center
-// 	justify-content: space-between
-// 	height: 50px
-// 	background-color: #fff
-// 	width: 100%
-// 	position: fixed
-// 	top: 50px
-// 	z-index: 120
-// 	box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03)
-// 	padding: 0 40px
-// 	box-sizing: border-box
-// 	cursor: auto
-
-// 	&__left, &__right
-// 		display: flex
-// 		align-items: center
-
-// 	&__option
-// 		display: flex
-// 		align-items: center
-// 		margin-right: 20px
-// 		&:last-child
-// 			margin-right: 0
-
-// 	&__users
-// 		display: flex
-// 		flex-direction: row-reverse
-
-// 		.Avatar 
-// 			margin-left: -10px
-// 			&:last-child
-// 				margin-left: 0
-
-// 	input[type="number"], .color
-// 		margin-left: 10px
-
-// 	input[type="number"]
-// 		width: 60px
-// 		font-size: 18px
-// 		border: 2px solid #e9eaf0
-// 		height: 26px
-// 		border-radius: 4px
-// 		padding-left: 5px
-// 		box-sizing: border-box
-// 		transition: border-color .2s
-// 		outline: none
-// 		&:focus
-// 			border-color: $pink
-// 			// outline-color: $pink
-
-
-
-
-// @media only screen and ( max-width:  700px)
-// 	.SettingBar
-// 		background-color: transparent
-// 		box-shadow: none
-// 		height: 100vh
-// 		top: 0
-// 		padding: 0
-// 		pointer-events: none
-
-// 		&__users
-// 			flex-direction: column-reverse
-// 			.Avatar 
-// 				margin-top: -10px
-// 				margin-left: 0
-// 				&:last-child
-// 					margin-top: 0
-
-// 		&__left, &__right
-// 			pointer-events: auto
-// 			position: absolute
-
-
-// 		&__left
-// 			display: flex
-// 			justify-content: center
-// 			bottom: 20px
-// 			// width: 100%
-// 			position: absolute
-// 			left: 50%
-// 			transform: translateX(-50%)
-
-// 			background-color: white
-// 			padding: 15px 20px
-// 			box-sizing: border-box
-// 			border-radius: 35px
-// 			box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
-
-// 			.ColorPicker, input
-// 				margin-left: 0 !important
-
-// 		&__right
-// 			right: 20px
-
-// 	.SettingBar__option
-// 		label
-// 			display: none
-
-	
