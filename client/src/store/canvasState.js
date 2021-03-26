@@ -1,4 +1,5 @@
-import { makeAutoObservable, runInAction } from "mobx"
+import { makeAutoObservable, runInAction } from 'mobx'
+import { nanoid } from 'nanoid'
 import canvasAPI from '../api/canvas'
 // import loadImage from '../helpers/imageLoader'
 
@@ -43,9 +44,20 @@ class CanvasState {
 	}
 
 	addDrawedTool(tool) {		// Добавляю новый нарисованные инструмент
+		const toolData = {
+			id: nanoid(),
+			...tool
+		}
+		
 		runInAction(() => {
-			this.canvasData.push(tool)
+			this.canvasData.push(toolData)
 		})
+
+		return toolData.id
+	}
+
+	getToolById(id) {
+		return this.canvasData.findIndex(t => t.id === id)
 	}
 
 	// Добавляем точку (для инстумента Brush)
@@ -120,10 +132,11 @@ class CanvasState {
 				title: data.data.title
 			}
 
-			// console.log(this.svg.width)
 			this.svg.setAttribute('width', data.data.width)
 			this.svg.setAttribute('height', data.data.height)
-
+			
+			data.data.content ? this.canvasData = JSON.parse(data.data.content) : this.canvasData = []
+			console.log(JSON.parse(data.data.content))
 			// this.redo(data.data.content)
 			this.setRoomId(canvasId)
 			// this.startSocketListeners(canvasId)			

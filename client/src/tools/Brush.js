@@ -3,6 +3,8 @@ import Tool from './Tool'
 import canvasState from '../store/canvasState'
 import toolState from '../store/toolState'
 
+import { toJS } from 'mobx'
+
 // TODO:
 // переименовать в Pen
 // порефакторить метод getCoordsOnSvg - чтобы принимал только event
@@ -23,7 +25,7 @@ export default class Brush extends Tool {
 
       this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
 
-      canvasState.addDrawedTool({
+      this.toolId = canvasState.addDrawedTool({
          type: 'Brush',
          points: [{ x: curCoords.x, y: curCoords.y }],
          settings: {
@@ -35,20 +37,19 @@ export default class Brush extends Tool {
 
    mouseMoveHandler(e) {
       if (this.mouseDown) {
-         const curCoords = this.getCoordsOnSvg(
-            // => { x, y }
+         const curCoords = this.getCoordsOnSvg( // => { x, y }
             canvasState.svg,
             e.clientX,
             e.clientY
          )
-         const lastTool = canvasState.canvasData.length - 1
+
+         const lastTool = canvasState.getToolById(this.toolId)
 
          this.appendToBuffer(curCoords)
          const pt = this.getAveragePoint(0)
 
-         if (pt) {
-            setTimeout(() => {
-               // добавляет плавный эффект задержки при рисовании
+         if (pt && lastTool) {
+            setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
                canvasState.addPoint(lastTool, pt)
             }, 30)
          }
@@ -59,6 +60,7 @@ export default class Brush extends Tool {
       this.mouseDown = false
       this.buffer = []
 
+      console.log(toJS(canvasState.canvasData))
       // canvasState.canvasSockets.stopDrawing()
    }
 

@@ -13,7 +13,7 @@ export default class Line extends Tool {
 		
 		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
 
-		canvasState.addDrawedTool({
+		this.toolId = canvasState.addDrawedTool({
 			type: 'Line',
 			params: {},
 			settings: {
@@ -25,10 +25,10 @@ export default class Line extends Tool {
 
 	mouseMoveHandler(e) {
 		if (this.mouseDown) {
-			const lastTool = canvasState.canvasData.length - 1
+			const lastTool = canvasState.getToolById(this.toolId)
 			const lineParams = this.drawLine(e)
 
-			canvasState.draw(lastTool, lineParams)
+			if (lastTool) canvasState.draw(lastTool, lineParams)
 		}
 	}
 

@@ -5,13 +5,12 @@ export default class Tool {
 	constructor(canvas) {
 		this.canvas = canvas
 		this.container = canvas.parentElement
-		// this.ctx = canvas.getContext('2d')
+
 		this.mouseDown = false
+		this.toolId = null	// ID текущего добавленного инструмента (чтобы редактировать)
 
 		this.destroyEvents()
 		this.listen()
-
-		
 	}
 
 	// set fillStyle(color) {

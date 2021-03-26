@@ -13,7 +13,7 @@ export default class Ellipse extends Tool {
 		
 		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
 
-		canvasState.addDrawedTool({
+		this.toolId = canvasState.addDrawedTool({
 			type: 'Ellipse',
 			params: {},
 			settings: {
@@ -26,10 +26,10 @@ export default class Ellipse extends Tool {
 
 	mouseMoveHandler(e) {
 		if (this.mouseDown) {
-			const lastTool = canvasState.canvasData.length - 1
+			const lastTool = canvasState.getToolById(this.toolId)
 			const ellipseParams = this.drawEllipse(e)
 
-			canvasState.draw(lastTool, ellipseParams)
+			if (lastTool) canvasState.draw(lastTool, ellipseParams)
 		}
 	}
 
