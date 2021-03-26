@@ -19,7 +19,7 @@ instance.interceptors.request.use(
    async function (config) {
       const ATExpiresIn = localStorage.getItem('ATE')
 
-      console.log('AXIOS_CONFIG', config)
+      // console.log('AXIOS_CONFIG', config)
       if (ATExpiresIn) {
          if (Date.now() >= ATExpiresIn * 1000) {
             try {

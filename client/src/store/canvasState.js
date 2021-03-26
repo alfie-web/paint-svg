@@ -56,7 +56,7 @@ class CanvasState {
 		return toolData.id
 	}
 
-	getToolById(id) {
+	getToolIndexById(id) {
 		return this.canvasData.findIndex(t => t.id === id)
 	}
 
@@ -135,8 +135,9 @@ class CanvasState {
 			this.svg.setAttribute('width', data.data.width)
 			this.svg.setAttribute('height', data.data.height)
 			
-			data.data.content ? this.canvasData = JSON.parse(data.data.content) : this.canvasData = []
-			console.log(JSON.parse(data.data.content))
+			const canvasData = data.data.content ? JSON.parse(data.data.content) : []
+			this.canvasData = canvasData
+
 			// this.redo(data.data.content)
 			this.setRoomId(canvasId)
 			// this.startSocketListeners(canvasId)			

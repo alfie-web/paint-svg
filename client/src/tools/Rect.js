@@ -26,10 +26,10 @@ export default class Rect extends Tool {
 
 	mouseMoveHandler(e) {
 		if (this.mouseDown) {
-			const lastTool = canvasState.getToolById(this.toolId)
+			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 			const rectParams = this.drawRect(e)
 
-			if (lastTool) canvasState.draw(lastTool, rectParams)
+			if (typeof lastToolIndex === 'number') canvasState.draw(lastToolIndex, rectParams)
 		}
 	}
 

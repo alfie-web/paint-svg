@@ -3,7 +3,7 @@ import Tool from './Tool'
 import canvasState from '../store/canvasState'
 import toolState from '../store/toolState'
 
-import { toJS } from 'mobx'
+// import { toJS } from 'mobx'
 
 // TODO:
 // переименовать в Pen
@@ -43,14 +43,14 @@ export default class Brush extends Tool {
             e.clientY
          )
 
-         const lastTool = canvasState.getToolById(this.toolId)
+         const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 
          this.appendToBuffer(curCoords)
          const pt = this.getAveragePoint(0)
 
-         if (pt && lastTool) {
+         if (pt && typeof lastToolIndex === 'number') {
             setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
-               canvasState.addPoint(lastTool, pt)
+               canvasState.addPoint(lastToolIndex, pt)
             }, 30)
          }
       }
@@ -60,7 +60,7 @@ export default class Brush extends Tool {
       this.mouseDown = false
       this.buffer = []
 
-      console.log(toJS(canvasState.canvasData))
+      // console.log(toJS(canvasState.canvasData))
       // canvasState.canvasSockets.stopDrawing()
    }
 

@@ -26,10 +26,10 @@ export default class Ellipse extends Tool {
 
 	mouseMoveHandler(e) {
 		if (this.mouseDown) {
-			const lastTool = canvasState.getToolById(this.toolId)
+			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
 			const ellipseParams = this.drawEllipse(e)
 
-			if (lastTool) canvasState.draw(lastTool, ellipseParams)
+			if (typeof lastToolIndex === 'number') canvasState.draw(lastToolIndex, ellipseParams)
 		}
 	}
 
