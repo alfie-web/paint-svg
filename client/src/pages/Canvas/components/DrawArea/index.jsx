@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import canvasState from '../../../../store/canvasState'
 
 import Brush from '../Brush'
@@ -30,15 +30,10 @@ const DrawArea = () => {
                   <Component
                      key={tool.id}
                      tool={tool}
-                     className={classNames(`${tool.type}`, {
-                        'animate': canvasState.animateId && canvasState.animateId === tool.id
-                     })}
-                     // className={
-                     //    canvasState.animateId &&
-                     //    canvasState.animateId === tool.id
-                     //       ? 'animate'
-                     //       : ''
-                     // }
+                     className={`${tool.type}`}
+                     // className={classNames(`${tool.type}`, {
+                     //    'animate': canvasState.animateId && canvasState.animateId === tool.id
+                     // })}
                   />
                )
             }
