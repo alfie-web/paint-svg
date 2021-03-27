@@ -2,7 +2,11 @@ import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
-const Brush = ({ tool }) => {
+// import canvasState from '../../../../store/canvasState'
+
+const Brush = ({ tool, className }) => {
+   // console.log(toJS(tool))
+
 	const pathData =
       'M ' +
       tool.points
@@ -12,9 +16,9 @@ const Brush = ({ tool }) => {
          .join(' L ')
 
    return <path 
-      className="path" 
-      d={pathData} 
-      // style={toJS(tool.settings)}
+      // вынести в родительский компонент
+      className={`path ${className}`}
+      d={pathData}
       {...toJS(tool.settings)}
       fill="none"
    />

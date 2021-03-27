@@ -23,12 +23,15 @@ class CanvasState {
 	// undoList = []	// история действий 
 	// redoList = []	// отменённые действия
 	canvasMeta = {}	// мета данные о холсте
+
+	animateId = null // id инструмента, который в данный момент анимируется
 	
 	constructor() {
 		makeAutoObservable(this)
 	}
 
 	initCanvas(canvas) {
+		console.log('init canvas')
 		this.setCanvas(canvas)
 		toolState.setTool(new Tools.Brush(canvas))		// дефолтный выбранный инструмент
 	}
@@ -155,9 +158,22 @@ class CanvasState {
 	onDraw = ({ tool }) => {
 		runInAction(() => {
 			this.canvasData.push(tool)
-		})
 
-		// Tools[tool.type].draw(tool)
+			// пушим с анимацией
+			// например какое-нибудь свойство типо isAnimate = true
+			// а в самих компонентах инструментах отслеживать эту штуку
+			// хотя не, не получится ибо анимирует ве компоненты
+			// хотя можно проверять id интсрумента
+			console.log('tool', tool)
+			this.animateId = tool.id
+		})
+		setTimeout(() => {
+			runInAction(() => {
+				this.animateId = null
+			})
+		}, 2010)
+
+		
 	}
 
 

@@ -49,21 +49,12 @@ export default class Tool {
 	}
 	mouseMoveHandler() {}
 
-	mouseUpHandler() {
-		console.log('mouseUpHandler2')
+	mouseUpHandler(e) {
+		if (e.button !== 0) return
+		
+		this.toolId && canvasState.drawToOther(this.toolId)
 		this.mouseDown = false
-
-		canvasState.drawToOther(this.toolId)
 	}
-
-	// getCoords(e) {
-	// 	const coords = this.container.getBoundingClientRect()
-
-	// 	return {
-	// 		coordX: e.pageX - e.target.offsetLeft - coords.left,
-	// 		coordY: e.pageY - e.target.offsetTop - coords.top
-	// 	}
-	// }
 
 	// благодаря этой функции я получаю координаты курсора мыши относительно svg элемента
 	// если бы брал просто e.clientX, e.clientY, то нужно было бы учитывать и координаты самого svg относительно документа

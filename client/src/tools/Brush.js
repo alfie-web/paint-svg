@@ -47,10 +47,9 @@ export default class Brush extends Tool {
       }
    }
 
-   mouseUpHandler() {
+   mouseUpHandler(e) {
+      super.mouseUpHandler(e)
       this.buffer = []
-      
-      super.mouseUpHandler()
    }
 
    draw(toolId, curCoords) {
