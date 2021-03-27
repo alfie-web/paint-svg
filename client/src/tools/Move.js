@@ -17,14 +17,21 @@ export default class Move extends Tool {
 		window.onmousedown = this.mouseDownHandler.bind(this)
 		window.onmousemove = this.mouseMoveHandler.bind(this)
 		window.onmouseup = this.mouseUpHandler.bind(this)
+
+		window.ontouchstart = this.mouseDownHandler.bind(this)
+		window.ontouchmove = this.mouseMoveHandler.bind(this)
+		window.ontouchend = this.mouseUpHandler.bind(this)
+		window.ontouchclose = this.mouseUpHandler.bind(this)
 	}
 
 	mouseDownHandler(e) {
-		if (e.button !== 0) return
-		this.mouseDown = true
+		super.mouseDownHandler(e)
+
+		const pageX = e.pageX ? e.pageX : e.touches[0].pageX
+		const pageY = e.pageY ? e.pageY : e.touches[0].pageY
 		
-		this.startX = this._getContainerCoord('left') - e.pageX		// текущую позуцию left - позиция левого края относительно документа 
-		this.startY = this._getContainerCoord('top') - e.pageY		// текущую позуцию top - позиция верхнего края относительно документа
+		this.startX = this._getContainerCoord('left') - pageX		// текущую позуцию left - позиция левого края относительно документа 
+		this.startY = this._getContainerCoord('top') - pageY		// текущую позуцию top - позиция верхнего края относительно документа
 	}
 
 	mouseMoveHandler(e) {
@@ -34,8 +41,11 @@ export default class Move extends Tool {
 		let prevL = this._getContainerCoord('left')	
 		let prevT = this._getContainerCoord('top')
 
-		this._setPos('left', this.startX + e.pageX)		// точка старта по x + позиция левого края относительно документа 
-		this._setPos('top', this.startY + e.pageY)  	// точка старта по y + позиция верхнего края относительно документа 
+		const pageX = e.pageX ? e.pageX : e.touches[0].pageX
+		const pageY = e.pageY ? e.pageY : e.touches[0].pageY
+
+		this._setPos('left', this.startX + pageX)		// точка старта по x + позиция левого края относительно документа 
+		this._setPos('top', this.startY + pageY)  	// точка старта по y + позиция верхнего края относительно документа 
 
 		const curL = this._getContainerCoord('left')
 		const curT = this._getContainerCoord('top')
@@ -43,8 +53,6 @@ export default class Move extends Tool {
 
 		const canvasW = d.width
 		const canvasH = d.height
-		// const canvasW = this.canvas.width
-		// const canvasH = this.canvas.height
 
 		if (d.left < 0 && Math.abs(d.left) > canvasW - 100) {	// проверяю зашли ли за левую границу	(с оффсетом 100)
 			if (prevL > curL) {		// и если продолжаем скролить влево
@@ -75,7 +83,6 @@ export default class Move extends Tool {
 	_getContainerCoord(dir) {
 		const val = this.container.style[dir] || 0
 		return parseInt(val)
-		// return +this.container.style[dir].split('px')[0]
 	}
 	
 	_setPos(dir, val) {

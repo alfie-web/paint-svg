@@ -81,10 +81,7 @@ export default class Line extends Tool {
 	start = null
 
 	mouseDownHandler(e) {
-		if (e.button !== 0) return
-		this.mouseDown = true
-		
-		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		this.start = super.mouseDownHandler(e)
 
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Line',
@@ -113,7 +110,8 @@ export default class Line extends Tool {
 	// }
 
 	drawLine = (e) => {
-		let curCoords = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		let curCoords = this.getCoordsOnSvg(e)
+
       let x2 = curCoords.x
       let y2 = curCoords.y
 

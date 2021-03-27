@@ -97,10 +97,7 @@ export default class Rect extends Tool {
 	start = null
 
 	mouseDownHandler(e) {
-		if (e.button !== 0) return
-		this.mouseDown = true
-		
-		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		this.start = super.mouseDownHandler(e)
 
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Rect',
@@ -131,7 +128,8 @@ export default class Rect extends Tool {
 	// }
 
 	drawRect = (e) => {
-		let curCoords = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		let curCoords = this.getCoordsOnSvg(e)
+
       let w = Math.abs(curCoords.x - this.start.x)
       let h = Math.abs(curCoords.y - this.start.y)
 

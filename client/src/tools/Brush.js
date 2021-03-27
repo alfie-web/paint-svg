@@ -128,14 +128,7 @@ export default class Brush extends Tool {
    buffer = []
 
    mouseDownHandler(e) {
-      if (e.button !== 0) return
-      this.mouseDown = true
-
-      const curCoords = this.getCoordsOnSvg(
-         canvasState.svg,
-         e.clientX,
-         e.clientY
-      )
+      const curCoords = super.mouseDownHandler(e)
 
       this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
 
@@ -152,12 +145,10 @@ export default class Brush extends Tool {
    }
 
    mouseMoveHandler(e) {
+      
       if (this.mouseDown) {
-         const curCoords = this.getCoordsOnSvg( // => { x, y }
-            canvasState.svg,
-            e.clientX,
-            e.clientY
-         )
+         // console.log(e) 
+         const curCoords = this.getCoordsOnSvg(e)  // => { x, y }
 
          this.draw(this.toolId, curCoords)
       }

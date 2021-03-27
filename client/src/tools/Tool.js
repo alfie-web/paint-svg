@@ -116,8 +116,12 @@ export default class Tool {
 	listen() {
 		this.canvas.onmousedown = this.mouseDownHandler.bind(this)
 		this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
-		// this.canvas.onmousemove = throttle(this.mouseMoveHandler.bind(this), 10)
 		this.canvas.onmouseup = this.mouseUpHandler.bind(this)
+
+		this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
+		this.canvas.ontouchmove = this.mouseMoveHandler.bind(this)
+		this.canvas.ontouchend = this.mouseUpHandler.bind(this)
+		this.canvas.ontouchclose = this.mouseUpHandler.bind(this)
 	}
 
 	destroyEvents() {
@@ -129,12 +133,28 @@ export default class Tool {
 		window.onmousedown = null
 		window.onmouseup = null
 
+		this.canvas.ontouchstart = null
+		this.canvas.ontouchmove = null
+		this.canvas.ontouchend = null
+		this.canvas.ontouchclose = null
+		window.ontouchstart = null
+		window.ontouchmove = null
+		window.ontouchend = null
+		window.ontouchclose = null
+
 		document.documentElement.style.cursor = 'auto'
 		this.canvas.style.cursor = 'crosshair'
 	}
 
-	mouseDownHandler() {
-		
+	mouseDownHandler(e) {
+		const allowEvents = ['mousedown', 'touchstart']
+
+      if (e.button && e.button !== 0) return
+      if (!allowEvents.includes(e.type)) return
+
+      this.mouseDown = true
+
+		return this.getCoordsOnSvg(e)
 	}
 	mouseMoveHandler() {}
 
@@ -155,10 +175,11 @@ export default class Tool {
 
 	// благодаря этой функции я получаю координаты курсора мыши относительно svg элемента
 	// если бы брал просто e.clientX, e.clientY, то нужно было бы учитывать и координаты самого svg относительно документа
-	getCoordsOnSvg(elem, x, y) {		
+	getCoordsOnSvg(e) {
+		const elem = canvasState.svg	
 		let p = canvasState.svg.createSVGPoint()
-		p.x = x
-		p.y = y
+		p.x = e.clientX ? e.clientX : e.touches[0].clientX
+		p.y = e.clientY ? e.clientY : e.touches[0].clientY
 		return p.matrixTransform(elem.getScreenCTM().inverse())
 	}
 }

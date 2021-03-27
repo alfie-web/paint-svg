@@ -87,10 +87,7 @@ export default class Ellipse extends Tool {
 	start = null
 
 	mouseDownHandler(e) {
-		if (e.button !== 0) return
-		this.mouseDown = true
-		
-		this.start = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		this.start = super.mouseDownHandler(e)
 
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Ellipse',
@@ -121,7 +118,7 @@ export default class Ellipse extends Tool {
 	// }
 
 	drawEllipse = (e) => {
-		let curCoords = this.getCoordsOnSvg(canvasState.svg, e.clientX, e.clientY)
+		let curCoords = this.getCoordsOnSvg(e)
 
 		let rx = (curCoords.x - this.start.x) * 0.5   /// radius for x based on input
 		let ry = (curCoords.y - this.start.y) * 0.5   /// radius for y based on input
