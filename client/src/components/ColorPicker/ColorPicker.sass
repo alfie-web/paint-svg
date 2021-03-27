@@ -1,0 +1,25 @@
+
+
+.ColorPicker
+	position: relative
+	overflow: visible !important
+
+	&__element
+		position: absolute
+		bottom: 40px
+		left: 50%
+		transform: translateX(-50%)
+		z-index: 10
+		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03) !important
+
+	.flexbox-fix
+		&:last-child
+			display: none !important
+
+
+	&__color
+		width: 24px
+		height: 24px
+		border-radius: 4px
+		cursor: pointer
+		border: 1px solid #eee
