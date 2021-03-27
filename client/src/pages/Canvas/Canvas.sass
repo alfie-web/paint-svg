@@ -34,32 +34,30 @@
 			z-index: 2000
 
 	&__element
+		display: flex
 		background-color: #fff
 		box-shadow: 0 10px 30px 0 rgba(30, 36, 40, .03)
-		// width: 600px
-		// height: 400px
 		cursor: crosshair
 
-	// &__drawArea
-	// 	width: 100%
-	// 	height: 100%
 
-
-
-.path, .rect, .ellipse, .line
-	// fill: none
-	// stroke: black
-	// stroke-width: 2px
+.Brush, .Rect, .Ellipse, .Line
+	position: relative
 	stroke-linejoin: round
 	stroke-linecap: round
+	transition: opacity .3s
 	/* stroke-dasharray: 4; */
  
 
-.path, .line
+.Brush, .Line
 	&.animate
-		stroke-dasharray: 1000%
-		stroke-dashoffset: 1000%
-		animation: dash 2s linear alternate infinite
+		// stroke-dasharray: 1000%
+		// stroke-dashoffset: 1000%
+		// animation: dash 2s linear alternate
+		animation: fade .3s linear alternate
+
+.Rect, .Ellipse
+	&.animate
+		animation: fade .3s linear alternate
 
 @keyframes dash
 	from 
@@ -67,7 +65,11 @@
 	to 
 		stroke-dashoffset: 0
 	
-
+@keyframes fade
+	from
+		opacity: 0
+	to
+		opacity: 1
 
 
 
