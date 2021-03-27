@@ -34,8 +34,7 @@ const ToolBar = ({ isFullscreen, handleFullscreen }) => {
 
 		const a = document.createElement('a')
 		a.href = url
-		// const name = canvasState.canvasDoc.title ?? 'Название холста'
-		const name = 'Название холста'
+		const name = canvasState.canvasMeta.title ?? 'Название холста'
 		a.download = `${name}.svg`
 		document.body.appendChild(a)
 		a.click()
