@@ -82,6 +82,7 @@ export default class Line extends Tool {
 
 	mouseDownHandler(e) {
 		this.start = super.mouseDownHandler(e)
+		if (!this.start) return
 
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Line',

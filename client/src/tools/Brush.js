@@ -129,6 +129,7 @@ export default class Brush extends Tool {
 
    mouseDownHandler(e) {
       const curCoords = super.mouseDownHandler(e)
+      if (!curCoords) return
 
       this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
 

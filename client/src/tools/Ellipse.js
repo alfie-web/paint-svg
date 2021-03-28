@@ -75,7 +75,7 @@
 
 
 
-
+// TODO: Избавиться от lastToolIndex, юзать id инструмента
 
 // Реалтайм рисование
 import Tool from "./Tool"
@@ -88,6 +88,7 @@ export default class Ellipse extends Tool {
 
 	mouseDownHandler(e) {
 		this.start = super.mouseDownHandler(e)
+		if (!this.start) return
 
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Ellipse',

@@ -95,7 +95,6 @@ class CanvasSockets {
       this.socket.on('FE-drawing', canvasState.onDrawing)
 
       // this.socket.on('FE-draw', canvasState.onDraw)
-      // this.socket.on('FE-stop-drawing', canvasState.onStopDrawing)
    }
 
    joinRoom = ({ roomId, userId, userName, userAvatar }) => {

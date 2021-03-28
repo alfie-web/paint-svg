@@ -232,6 +232,14 @@ class CanvasState {
 	// undoList = []	// история действий 
 	// redoList = []	// отменённые действия
 	canvasMeta = {}	// мета данные о холсте
+
+	editedTextTool = null	// текущий редактируемый текст инструмент
+	// editedTextTool = {
+	// 	toolId: null,
+	// 	x: 0,
+	// 	y: 0,
+	// 	text: ''
+	// }	// текущий редактируемый текст инструмент
 	
 	constructor() {
 		makeAutoObservable(this)
@@ -239,7 +247,7 @@ class CanvasState {
 
 	initCanvas(canvas) {
 		this.setCanvas(canvas)
-		toolState.setTool(new Tools.Brush(canvas))		// дефолтный выбранный инструмент
+		toolState.setTool(new Tools.Text(canvas))		// дефолтный выбранный инструмент
 	}
 
 	setCanvas(canvas) {		

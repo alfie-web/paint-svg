@@ -6,12 +6,15 @@ import Brush from '../Brush'
 import Rect from '../Rect'
 import Ellipse from '../Ellipse'
 import Line from '../Line'
+import Text from '../Text'
+
 
 const ToolComponents = {
    Brush,
    Rect,
    Ellipse,
    Line,
+   Text
 }
 
 const DrawArea = () => {

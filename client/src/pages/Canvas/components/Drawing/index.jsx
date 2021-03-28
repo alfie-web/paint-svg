@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import canvasState from '../../../../store/canvasState'
 
 import DrawArea from '../DrawArea'
+import TextInput from '../TextInput'
 import Preloader from '../../../../components/Preloader'
 
 const Drawing = () => {
@@ -16,6 +17,8 @@ const Drawing = () => {
    return (
       <>
       <div className="Canvas">
+         { canvasState.editedTextTool && <TextInput /> }
+
          <div
             className="Canvas__element"
             ref={drawAreaRef}
