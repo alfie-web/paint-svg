@@ -111,24 +111,7 @@ export default class Rect extends Tool {
 		})
 	}
 
-	mouseMoveHandler(e) {
-		if (this.mouseDown) {
-			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-			const rectParams = this.drawRect(e)
-
-			if (typeof lastToolIndex === 'number') {
-				canvasState.draw(lastToolIndex, rectParams)
-				canvasState.drawToOther(lastToolIndex, rectParams)
-			}
-		}
-	}
-
-
-	// static draw({ x, y, ctx, strokeStyle, lineWidth }) {
-
-	// }
-
-	drawRect = (e) => {
+	getParams = (e) => {
 		let curCoords = this.getCoordsOnSvg(e)
 
       let w = Math.abs(curCoords.x - this.start.x)

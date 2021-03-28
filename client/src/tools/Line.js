@@ -94,23 +94,7 @@ export default class Line extends Tool {
 		})
 	}
 
-	mouseMoveHandler(e) {
-		if (this.mouseDown) {
-			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-			const lineParams = this.drawLine(e)
-
-			if (typeof lastToolIndex === 'number') {
-				canvasState.draw(lastToolIndex, lineParams)
-				canvasState.drawToOther(lastToolIndex, lineParams)
-			}
-		}
-	}
-
-	// static draw({ x, y, ctx, strokeStyle, lineWidth }) {
-
-	// }
-
-	drawLine = (e) => {
+	getParams = (e) => {
 		let curCoords = this.getCoordsOnSvg(e)
 
       let x2 = curCoords.x

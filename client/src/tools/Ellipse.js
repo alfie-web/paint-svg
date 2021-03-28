@@ -101,24 +101,8 @@ export default class Ellipse extends Tool {
 		})
 	}
 
-	mouseMoveHandler(e) {
-		if (this.mouseDown) {
-			const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-			const ellipseParams = this.drawEllipse(e)
 
-			if (typeof lastToolIndex === 'number') {
-				canvasState.draw(lastToolIndex, ellipseParams)
-				canvasState.drawToOther(lastToolIndex, ellipseParams)
-			}
-		}
-	}
-
-
-	// draw({ x, y, ctx, strokeStyle, lineWidth }) {
-
-	// }
-
-	drawEllipse = (e) => {
+	getParams = (e) => {
 		let curCoords = this.getCoordsOnSvg(e)
 
 		let rx = (curCoords.x - this.start.x) * 0.5   /// radius for x based on input

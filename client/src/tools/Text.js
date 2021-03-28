@@ -19,13 +19,15 @@ export default class Text extends Tool {
 			text: ''
 		}
 
+		// ЧТо если возвращать весь созанный инструмент
 		this.toolId = canvasState.addDrawedTool({
 			type: 'Text',
 			params: textParams,
 			settings: {
-            // stroke: toolState.stroke,
+            fill: toolState.stroke,
          }
 		})
+		// И вообще избавиться от этой штуки, а брать её в this.toolId (ну переимоновать в this.tool)
 		runInAction(() => {
 			canvasState.editedTextTool = {
 				toolId: this.toolId,
@@ -35,26 +37,12 @@ export default class Text extends Tool {
 	}
 
 	mouseMoveHandler(e) {
-		// if (this.mouseDown) {
-		// 	const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-		// 	const rectParams = this.drawRect(e)
 
-		// 	if (typeof lastToolIndex === 'number') {
-		// 		canvasState.draw(lastToolIndex, rectParams)
-		// 		canvasState.drawToOther(lastToolIndex, rectParams)
-		// 	}
-		// }
 	}
 
 	mouseUpHandler(e) {
 		if (this.mouseDown) {
-			// const lastToolIndex = canvasState.getToolIndexById(this.toolId)
-			// const rectParams = this.drawRect(e)
 
-			// if (typeof lastToolIndex === 'number') {
-			// 	canvasState.draw(lastToolIndex, rectParams)
-			// 	canvasState.drawToOther(lastToolIndex, rectParams)
-			// }
 		}
 	}
 }

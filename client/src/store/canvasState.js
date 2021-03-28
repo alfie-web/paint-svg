@@ -234,12 +234,6 @@ class CanvasState {
 	canvasMeta = {}	// мета данные о холсте
 
 	editedTextTool = null	// текущий редактируемый текст инструмент
-	// editedTextTool = {
-	// 	toolId: null,
-	// 	x: 0,
-	// 	y: 0,
-	// 	text: ''
-	// }	// текущий редактируемый текст инструмент
 	
 	constructor() {
 		makeAutoObservable(this)
@@ -291,14 +285,6 @@ class CanvasState {
 			this.canvasData[toolIndex].params = params
 		})
 	}
-
-	// А можно будет попробовать эту логику в addPoint и draw сделать
-	// drawToOther(toolId) {
-   //    const lastToolIndex = this.getToolIndexById(toolId)
-   //    this.canvasSockets.draw(toJS(this.canvasData[lastToolIndex]))
-	// }
-
-
 
 
 	drawToOther(index, params) {
