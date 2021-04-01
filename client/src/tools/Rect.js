@@ -11,7 +11,7 @@ export default class Rect extends Tool {
 		this.start = super.mouseDownHandler(e)
 		if (!this.start) return
 
-		this.toolId = canvasState.addDrawedTool({
+		const tool = {
 			type: 'Rect',
 			params: {},
 			settings: {
@@ -19,7 +19,9 @@ export default class Rect extends Tool {
             strokeWidth: toolState.lineWidth,
 				fill: toolState.fill
          }
-		})
+		}
+
+		this.toolId = canvasState.addDrawedTool(tool)
 	}
 
 	getParams = (e) => {

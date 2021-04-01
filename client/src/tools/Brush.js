@@ -9,6 +9,10 @@ import toolState from '../store/toolState'
 // Избавиться от getToolIndexById искать объект по id
 // или мейби вообще его целиком сохранять в this.toolId
 
+// А что если сохранять в стейт только при mouseUp
+// А в момент move в локальном стейте у компоненты Brush
+
+
 export default class Brush extends Tool {
    bufferSize = 8
    buffer = []
@@ -32,12 +36,9 @@ export default class Brush extends Tool {
    }
 
    mouseMoveHandler(e) {
-      
-      if (this.mouseDown) {
-         const curCoords = this.getCoordsOnSvg(e)  // => { x, y }
-
-         this.draw(this.toolId, curCoords)
-      }
+      setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
+         super.mouseMoveHandler(e)
+      }, 20)
    }
 
    mouseUpHandler() {
@@ -47,25 +48,13 @@ export default class Brush extends Tool {
       // canvasState.drawToOther(this.toolId)
    }
 
-   draw(toolId, curCoords) {
-      const lastToolIndex = canvasState.getToolIndexById(toolId)
+   getParams(e) {
+      const curCoords = this.getCoordsOnSvg(e)  // => { x, y }
 
       this.appendToBuffer(curCoords)
       const pt = this.getAveragePoint(0)
 
-      if (pt && typeof lastToolIndex === 'number') {
-         setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
-            // canvasState.addPoint(lastToolIndex, pt)
-
-            // Может менее производительно чем addPoint, зато общий метод для всех инструментов
-            canvasState.draw(lastToolIndex, [
-               ...canvasState.canvasData[lastToolIndex].params,
-               pt
-            ])
-
-            canvasState.drawToOther(lastToolIndex, pt)
-         }, 20)
-      }
+      return pt
    }
 
    appendToBuffer = function (pt) {
