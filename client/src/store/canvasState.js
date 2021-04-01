@@ -275,7 +275,7 @@ class CanvasState {
 	// Добавляем точку (для инстумента Brush)
 	addPoint(toolIndex, point) {	// пока индекс - потом можно и id придумать
 		runInAction(() => {
-			this.canvasData[toolIndex].points.push(point)
+			this.canvasData[toolIndex].params.push(point)
 		})
 	}
 
