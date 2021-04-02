@@ -16,9 +16,7 @@ export default class Brush extends Tool {
    mouseDownHandler(e) {
       const curCoords = super.mouseDownHandler(e)
       if (!curCoords) return
-
-      this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
-
+  
       const tool = {
          type: 'Brush',
          params: `M ${curCoords.x} ${curCoords.y} `,
@@ -27,8 +25,10 @@ export default class Brush extends Tool {
             strokeWidth: toolState.lineWidth
          }
       }
-
+      
       this.toolId = canvasState.addDrawedTool(tool)
+      
+      this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
    }
 
    mouseUpHandler() {
