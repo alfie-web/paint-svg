@@ -65,11 +65,9 @@ class CanvasState {
 
 	// Добавляем точку (для инстумента Brush)
 	addPoint(toolIndex, point) {	// пока индекс - потом можно и id придумать
-		if (this.canvasData[toolIndex].params.length < 400) {		// ограничение длины линии (иначе утечки памяти)
-			runInAction(() => {
-				this.canvasData[toolIndex].params.push(point)
-			})
-		}
+		runInAction(() => {
+			this.canvasData[toolIndex].params += point
+		})
 	}
 
 	// меняем параметры инструмента (рисуем)
@@ -106,10 +104,8 @@ class CanvasState {
 	}
 
 	drawToOther(toolId, params) {
-		console.log(params)
 		this.draw(toolId, params)
 
-		// throttle(this.canvasSockets.drawing(toolId, params), 1000)
 		this.canvasSockets.drawing(toolId, params)
 	}
 

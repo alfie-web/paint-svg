@@ -17,7 +17,7 @@ export default class Tool {
 
 	listen() {
 		this.canvas.onmousedown = this.mouseDownHandler.bind(this)
-		this.canvas.onmousemove = throttle(this.mouseMoveHandler.bind(this), 10)
+		this.canvas.onmousemove = throttle(this.mouseMoveHandler.bind(this), 10)	// задержка, в том числе и анимация плавного рисования
 		this.canvas.onmouseup = this.mouseUpHandler.bind(this)
 
 		this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
