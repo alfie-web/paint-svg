@@ -11,14 +11,16 @@ export default class Line extends Tool {
 		this.start = super.mouseDownHandler(e)
 		if (!this.start) return
 
-		this.toolId = canvasState.addDrawedTool({
+		const tool = {
 			type: 'Line',
 			params: {},
 			settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth
          }
-		})
+		}
+
+		this.toolId = canvasState.addDrawedTool(tool)
 	}
 
 	getParams = (e) => {

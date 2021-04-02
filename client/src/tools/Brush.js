@@ -1,4 +1,3 @@
-// риалтайм рисование
 import Tool from './Tool'
 
 import canvasState from '../store/canvasState'
@@ -9,6 +8,7 @@ import toolState from '../store/toolState'
 // Избавиться от getToolIndexById искать объект по id
 // или мейби вообще его целиком сохранять в this.toolId
 
+
 export default class Brush extends Tool {
    bufferSize = 8
    buffer = []
@@ -16,56 +16,34 @@ export default class Brush extends Tool {
    mouseDownHandler(e) {
       const curCoords = super.mouseDownHandler(e)
       if (!curCoords) return
-
-      this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
-
+  
       const tool = {
          type: 'Brush',
-         params: [{ x: curCoords.x, y: curCoords.y }],
+         params: `M ${curCoords.x} ${curCoords.y} `,
          settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth
          }
       }
-
-      this.toolId = canvasState.addDrawedTool(tool)
-   }
-
-   mouseMoveHandler(e) {
       
-      if (this.mouseDown) {
-         const curCoords = this.getCoordsOnSvg(e)  // => { x, y }
-
-         this.draw(this.toolId, curCoords)
-      }
+      this.toolId = canvasState.addDrawedTool(tool)
+      
+      this.appendToBuffer({ x: curCoords.x, y: curCoords.y })
    }
 
    mouseUpHandler() {
       this.mouseDown = false
       this.buffer = []
-
-      // canvasState.drawToOther(this.toolId)
    }
 
-   draw(toolId, curCoords) {
-      const lastToolIndex = canvasState.getToolIndexById(toolId)
+   getParams(e) {
+      const curCoords = this.getCoordsOnSvg(e)  // => { x, y }
 
       this.appendToBuffer(curCoords)
       const pt = this.getAveragePoint(0)
 
-      if (pt && typeof lastToolIndex === 'number') {
-         setTimeout(() => {    // добавляет плавный эффект задержки при рисовании
-            // canvasState.addPoint(lastToolIndex, pt)
-
-            // Может менее производительно чем addPoint, зато общий метод для всех инструментов
-            canvasState.draw(lastToolIndex, [
-               ...canvasState.canvasData[lastToolIndex].params,
-               pt
-            ])
-
-            canvasState.drawToOther(lastToolIndex, pt)
-         }, 20)
-      }
+      if (!pt || !pt.x || !pt.y) return
+      return `L ${pt.x} ${pt.y} `
    }
 
    appendToBuffer = function (pt) {

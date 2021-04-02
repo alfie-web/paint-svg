@@ -3,15 +3,9 @@ import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
 const Brush = ({ tool, className }) => {
-	const pathData =
-      'M ' +
-      tool.params
-         .map((p) => {
-            return `${p.x} ${p.y}`
-         })
-         .join(' L ')
+	const pathData = tool.params
 
-   return toJS(tool.params) && <path 
+   return toJS(pathData) && <path 
       className={className}
       d={pathData}
       {...toJS(tool.settings)}
