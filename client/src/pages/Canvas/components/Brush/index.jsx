@@ -5,7 +5,7 @@ import { toJS } from 'mobx'
 const Brush = ({ tool, className }) => {
 	const pathData =
       'M ' +
-      tool.points
+      tool.params
          .map((p) => {
             return `${p.x} ${p.y}`
          })
