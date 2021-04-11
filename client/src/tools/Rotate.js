@@ -4,7 +4,7 @@ export default class Rotate extends Tool {
    constructor(canvas) {
       super(canvas) 
 
-      this.angle = this._getCurrentRotation(this.container)   // стартовый угол
+      this.angle = this._getCurrentAngle(this.container)   // стартовый угол
       this.startAngle = 0  // угол на который прокручиваем
       this.center = this._getCenter(this.container)
       this.R2D = 180 / Math.PI
@@ -29,17 +29,13 @@ export default class Rotate extends Tool {
    mouseDownHandler(e) {
       super.mouseDownHandler(e)
 
-      let x = e.clientX - this.center.x
-      let y = e.clientY - this.center.y
-      this.startAngle = this.R2D * Math.atan2(y, x)
+      this.startAngle = this._calculateAngle(e)
    }
 
    mouseMoveHandler(e) {
       if (!this.mouseDown) return
 
-      let x = e.clientX - this.center.x
-      let y = e.clientY - this.center.y
-      let curAngle = this.R2D * Math.atan2(y, x)
+      let curAngle = this._calculateAngle(e)
 
       this.container.style.webkitTransform = `rotate(${this.angle + curAngle - this.startAngle}deg)`
    }
@@ -47,7 +43,17 @@ export default class Rotate extends Tool {
    mouseUpHandler(e) {
       this.mouseDown = false
 
-      this.angle = this._getCurrentRotation(this.container)
+      this.angle = this._getCurrentAngle(this.container)
+   }
+
+   _calculateAngle(e) {
+      const clientX = e.clientX ? e.clientX : e.touches[0].clientX
+		const clientY = e.clientY ? e.clientY : e.touches[0].clientY
+      let x = clientX - this.center.x
+      let y = clientY - this.center.y
+      let angle = this.R2D * Math.atan2(y, x)
+
+      return angle
    }
 
    _getCenter(element) {
@@ -55,7 +61,7 @@ export default class Rotate extends Tool {
       return {x: left + width / 2, y: top + height / 2}
    }
 
-   _getCurrentRotation(el) {
+   _getCurrentAngle(el) {
       const st = window.getComputedStyle(el, null)
       const tm =
          st.getPropertyValue('-webkit-transform') ||
