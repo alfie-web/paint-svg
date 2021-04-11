@@ -9,8 +9,8 @@ class CanvasSockets {
    }
 
    startSocketListeners = ({ roomId, userId, userName, userAvatar }) => {
-      this.socket = io('ws://localhost:8989')
-      // this.socket = io('wss://collaborative-paint-app.herokuapp.com')
+      // this.socket = io('ws://localhost:8989')
+      this.socket = io('wss://collaborative-paint-app.herokuapp.com')
 
       this.joinRoom({ roomId, userId, userName, userAvatar })
 
