@@ -3,6 +3,7 @@ import Rect from './Rect'
 import Ellipse from './Ellipse'
 import Line from './Line'
 import Move from './Move'
+import Rotate from './Rotate'
 import Text from './Text'
 
 const Tools = {
@@ -11,6 +12,7 @@ const Tools = {
 	Ellipse,
 	Line,
 	Move,
+	Rotate,
 	Text
 }
 
