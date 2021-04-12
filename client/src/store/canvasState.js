@@ -18,10 +18,7 @@ class CanvasState {
 	canvas = null	// холст для обработки mouseDown, mouseMove, mouseUp
 	svg = null	// svg элемент
 	canvasData = []	// Нарисованные фигуры тут 
-
-
-	// undoList = []	// история действий 
-	// redoList = []	// отменённые действия
+	undoList = []	// отменённые действий 
 	canvasMeta = {}	// мета данные о холсте
 
 	editedTextTool = null	// текущий редактируемый текст инструмент
@@ -108,6 +105,27 @@ class CanvasState {
 
 		this.canvasSockets.drawing(toolId, params)
 	}
+
+	undo() {
+		if (this.canvasData.length) {
+			runInAction(() => {
+				const lastTool = this.canvasData.pop()
+				this.undoList.push(lastTool)
+			})
+		}
+	}
+
+	redo() {
+		if (this.undoList.length) {
+			runInAction(() => {
+				const lastTool = this.undoList.pop()
+				lastTool && this.canvasData.push(lastTool)
+			})
+		}
+	}
+
+
+
 
 
 

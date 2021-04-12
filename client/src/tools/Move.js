@@ -44,6 +44,8 @@ export default class Move extends Tool {
 		const pageX = e.pageX ? e.pageX : e.touches[0].pageX
 		const pageY = e.pageY ? e.pageY : e.touches[0].pageY
 
+		if (!pageX || !pageY) return
+
 		this._setPos('left', this.startX + pageX)		// точка старта по x + позиция левого края относительно документа 
 		this._setPos('top', this.startY + pageY)  	// точка старта по y + позиция верхнего края относительно документа 
 

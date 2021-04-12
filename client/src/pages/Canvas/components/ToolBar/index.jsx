@@ -1,4 +1,3 @@
-
 import toolState from '../../../../store/toolState'
 import canvasState from '../../../../store/canvasState'
 
@@ -13,7 +12,6 @@ import Rotate from '../../../../tools/Rotate'
 import './ToolBar.sass'
 import { observer } from 'mobx-react-lite'
 import MenuVidget from '../../../../components/MenuVidget'
-// import ColorPicker from '../../../../components/ColorPicker'
 import IconButton from '../../../../components/IconButton'
 
 
@@ -21,11 +19,6 @@ const ToolBar = ({ isFullscreen, handleFullscreen }) => {
 	const checkActive = (Class) => {
 		return toolState.tool && toolState.tool instanceof Class
 	}
-
-	// const changeColor = val => {
-	// 	toolState.setStrokeColor(val)
-	// 	toolState.setFillColor(val)
-	// }
 
 	const download = () => {
 		var serializer = new XMLSerializer()
@@ -192,7 +185,7 @@ const ToolBar = ({ isFullscreen, handleFullscreen }) => {
 			</div> }
 
 			<div className="ToolBar__right">
-				{/* <IconButton 
+				<IconButton 
 					className="ToolBar__btn undo"
 					onClick={() => canvasState.undo()}
 					title="Отменить действие"
@@ -201,6 +194,7 @@ const ToolBar = ({ isFullscreen, handleFullscreen }) => {
 							<path fillRule="evenodd" clipRule="evenodd" d="M4.58327 0.14586C4.99687 0.41452 5.11141 0.963103 4.83909 1.37116L2.79398 4.43569C7.50724 2.6046 12.9952 4.40132 15.6044 8.86004C18.4774 13.7694 16.7724 20.0469 11.7963 22.8813C11.3675 23.1256 10.8191 22.9807 10.5715 22.5576C10.3239 22.1345 10.4708 21.5934 10.8997 21.3492C15.0181 19.0033 16.4291 13.8078 14.0514 9.74464C11.8592 5.99853 7.21168 4.52287 3.27215 6.15386L6.24018 8.08178C6.65378 8.35044 6.76832 8.89903 6.496 9.30708C6.22369 9.71513 5.66765 9.82813 5.25404 9.55947L0.403668 6.40885C-0.00993356 6.14019 -0.12447 5.59161 0.147843 5.18356L3.34131 0.398252C3.61362 -0.00980029 4.16967 -0.1228 4.58327 0.14586Z"/>
 						</svg>
 					}
+					disabled={!canvasState.canvasData.length}
 				/>
 
 				<IconButton 
@@ -212,7 +206,8 @@ const ToolBar = ({ isFullscreen, handleFullscreen }) => {
 							<path fillRule="evenodd" clipRule="evenodd" d="M12.4167 0.14586C12.0031 0.41452 11.8886 0.963103 12.1609 1.37116L14.206 4.43569C9.49276 2.6046 4.00484 4.40132 1.3956 8.86004C-1.47736 13.7694 0.227568 20.0469 5.20367 22.8813C5.63253 23.1256 6.1809 22.9807 6.4285 22.5576C6.6761 22.1345 6.52916 21.5934 6.10031 21.3492C1.98191 19.0033 0.570856 13.8078 2.94861 9.74464C5.14085 5.99853 9.78832 4.52287 13.7279 6.15386L10.7598 8.08178C10.3462 8.35044 10.2317 8.89903 10.504 9.30708C10.7763 9.71513 11.3324 9.82813 11.746 9.55947L16.5963 6.40885C17.0099 6.14019 17.1245 5.59161 16.8522 5.18356L13.6587 0.398252C13.3864 -0.00980029 12.8303 -0.1228 12.4167 0.14586Z"/>
 						</svg>
 					}
-				/> */}
+					disabled={!canvasState.undoList.length}
+				/>
 
 				<IconButton 
 					className="ToolBar__btn"
