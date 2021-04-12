@@ -101,5 +101,10 @@ module.exports = (httpServer) => {
          const { roomId, userId, toolId, params } = JSON.parse(state)
          socket.broadcast.to(roomId).emit('FE-drawing', { toolId, params })
       })
+
+      socket.on('BE-undo-redo', (state) => {
+         const { roomId, userId, type } = JSON.parse(state)
+         socket.broadcast.to(roomId).emit('FE-undo-redo', type)
+      })
    })
 }

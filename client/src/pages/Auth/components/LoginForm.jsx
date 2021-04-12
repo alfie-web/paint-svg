@@ -17,7 +17,6 @@ const LoginForm = () => {
    })
 
    const onSubmit = (data) => {
-      console.log(data)
       usersState.login(data)
    }
 
