@@ -9,8 +9,8 @@ class CanvasSockets {
    }
 
    startSocketListeners = ({ roomId, userId, userName, userAvatar }) => {
-      this.socket = io('ws://localhost:8989')
-      // this.socket = io('wss://collaborative-paint-app.herokuapp.com')
+      // this.socket = io('ws://localhost:8989')
+      this.socket = io('wss://collaborative-paint-app.herokuapp.com')
 
       this.joinRoom({ roomId, userId, userName, userAvatar })
 
@@ -21,6 +21,7 @@ class CanvasSockets {
 
       this.socket.on('FE-start-drawing', canvasState.onStartDrawing)
       this.socket.on('FE-drawing', canvasState.onDrawing)
+      this.socket.on('FE-undo-redo', canvasState.onUndoRedo)
 
       // this.socket.on('FE-draw', canvasState.onDraw)
    }
@@ -53,6 +54,14 @@ class CanvasSockets {
          userId: usersState.user._id,
          toolId,
          params
+      }))
+   }
+
+   undoRedo = (type) => {
+      this.socket.emit('BE-undo-redo', JSON.stringify({
+         roomId: canvasState.roomId,
+         userId: usersState.user._id,
+         type
       }))
    }
 }

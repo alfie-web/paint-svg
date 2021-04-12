@@ -74,13 +74,6 @@ class CanvasState {
 		})
 	}
 
-
-	// drawToOther(index, params) {
-	// 	const tool = toJS(this.canvasData[index])
-   //    this.canvasSockets.drawing(tool.id, params)
-	// }
-
-
 	draw(toolId, params) {
 		const toolIndex = this.getToolIndexById(toolId)
 
@@ -106,21 +99,23 @@ class CanvasState {
 		this.canvasSockets.drawing(toolId, params)
 	}
 
-	undo() {
+	undo(withSocket = true) {
 		if (this.canvasData.length) {
 			runInAction(() => {
 				const lastTool = this.canvasData.pop()
 				this.undoList.push(lastTool)
 			})
+			withSocket && this.canvasSockets.undoRedo('undo')
 		}
 	}
 
-	redo() {
+	redo(withSocket = true) {
 		if (this.undoList.length) {
 			runInAction(() => {
 				const lastTool = this.undoList.pop()
 				lastTool && this.canvasData.push(lastTool)
 			})
+			withSocket && this.canvasSockets.undoRedo('redo')
 		}
 	}
 
@@ -200,8 +195,11 @@ class CanvasState {
 	}
 
 	onDrawing = ({ toolId, params }) => {
-		console.log(toolId, params)
 		this.draw(toolId, params)
+	}
+
+	onUndoRedo = (type) => {
+		this[type](false)
 	}
 }
 
