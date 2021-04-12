@@ -29,14 +29,16 @@ export default class Rotate extends Tool {
    mouseDownHandler(e) {
       super.mouseDownHandler(e)
 
-      this.startAngle = this._calculateAngle(e)
+      const curAngle = this._calculateAngle(e)
+      if (!curAngle) return
+      this.startAngle = curAngle
    }
 
    mouseMoveHandler(e) {
       if (!this.mouseDown) return
 
       let curAngle = this._calculateAngle(e)
-
+      if (!curAngle) return
       this.container.style.webkitTransform = `rotate(${this.angle + curAngle - this.startAngle}deg)`
    }
 
@@ -47,8 +49,8 @@ export default class Rotate extends Tool {
    }
 
    _calculateAngle(e) {
-      const clientX = e.clientX ? e.clientX : e.touches[0].clientX
-		const clientY = e.clientY ? e.clientY : e.touches[0].clientY
+      const clientX = e.clientX ? e.clientX : e.touches[0].clientX ? e.touches[0].pageX : null
+		const clientY = e.clientY ? e.clientY : e.touches[0].clientY ? e.touches[0].pageY : null
       let x = clientX - this.center.x
       let y = clientY - this.center.y
       let angle = this.R2D * Math.atan2(y, x)

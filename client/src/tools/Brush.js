@@ -19,7 +19,8 @@ export default class Brush extends Tool {
   
       const tool = {
          type: 'Brush',
-         params: `M ${curCoords.x} ${curCoords.y} `,
+         params: `M ${curCoords.x} ${curCoords.y} L ${curCoords.x + 0.1} ${curCoords.y + 0.1} `,
+         // params: `M ${curCoords.x} ${curCoords.y} `,
          settings: {
             stroke: toolState.stroke,
             strokeWidth: toolState.lineWidth

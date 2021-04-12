@@ -2,6 +2,7 @@
 import io from 'socket.io-client'
 import canvasState from '../store/canvasState'
 import usersState from '../store/usersState'
+import throttle from '../helpers/throttle'
 
 class CanvasSockets {
    constructor() {
@@ -9,8 +10,8 @@ class CanvasSockets {
    }
 
    startSocketListeners = ({ roomId, userId, userName, userAvatar }) => {
-      this.socket = io('ws://localhost:8989')
-      // this.socket = io('wss://collaborative-paint-app.herokuapp.com')
+      // this.socket = io('ws://localhost:8989')
+      this.socket = io('wss://collaborative-paint-app.herokuapp.com')
 
       this.joinRoom({ roomId, userId, userName, userAvatar })
 
@@ -49,12 +50,15 @@ class CanvasSockets {
    }
 
    drawing = (toolId, params) => {
-      this.socket.emit('BE-drawing', JSON.stringify({
-         roomId: canvasState.roomId,
-         userId: usersState.user._id,
-         toolId,
-         params
-      }))
+      throttle(
+         this.socket.emit('BE-drawing', JSON.stringify({
+            roomId: canvasState.roomId,
+            userId: usersState.user._id,
+            toolId,
+            params
+         })),
+         10
+      )
    }
 
    undoRedo = (type) => {

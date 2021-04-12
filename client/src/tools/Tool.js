@@ -1,5 +1,5 @@
 // риалтайм рисование
-import throttle from "../helpers/throttle"
+// import throttle from "../helpers/throttle"
 
 import canvasState from "../store/canvasState"
 
@@ -17,11 +17,13 @@ export default class Tool {
 
 	listen() {
 		this.canvas.onmousedown = this.mouseDownHandler.bind(this)
-		this.canvas.onmousemove = throttle(this.mouseMoveHandler.bind(this), 10)	// задержка, в том числе и анимация плавного рисования
+		// this.canvas.onmousemove = throttle(this.mouseMoveHandler.bind(this), 10)	// задержка, в том числе и анимация плавного рисования
+		this.canvas.onmousemove = this.mouseMoveHandler.bind(this)	// задержка, в том числе и анимация плавного рисования
 		this.canvas.onmouseup = this.mouseUpHandler.bind(this)
 
 		this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
-		this.canvas.ontouchmove = throttle(this.mouseMoveHandler.bind(this), 10)
+		// this.canvas.ontouchmove = throttle(this.mouseMoveHandler.bind(this), 10)
+		this.canvas.ontouchmove = this.mouseMoveHandler.bind(this)
 		this.canvas.ontouchend = this.mouseUpHandler.bind(this)
 		this.canvas.ontouchclose = this.mouseUpHandler.bind(this)
 	}

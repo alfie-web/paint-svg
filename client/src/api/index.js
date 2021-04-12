@@ -1,8 +1,8 @@
 import axios from 'axios'
 import usersAPI from './users'
 
-// const baseURL = 'https://collaborative-paint-app.herokuapp.com/api'
-const baseURL = 'http://localhost:8989/api'
+const baseURL = 'https://collaborative-paint-app.herokuapp.com/api'
+// const baseURL = 'http://localhost:8989/api'
 
 const axiosConfig = {
    withCredentials: true,

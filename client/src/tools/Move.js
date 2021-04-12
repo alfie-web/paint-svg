@@ -41,8 +41,8 @@ export default class Move extends Tool {
 		let prevL = this._getContainerCoord('left')	
 		let prevT = this._getContainerCoord('top')
 
-		const pageX = e.pageX ? e.pageX : e.touches[0].pageX
-		const pageY = e.pageY ? e.pageY : e.touches[0].pageY
+		const pageX = e.pageX ? e.pageX : e.touches[0].pageX ? e.touches[0].pageX : null
+		const pageY = e.pageY ? e.pageY : e.touches[0].pageY ? e.touches[0].pageY : null
 
 		if (!pageX || !pageY) return
 
