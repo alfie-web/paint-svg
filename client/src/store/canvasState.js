@@ -29,7 +29,7 @@ class CanvasState {
 
 	initCanvas(canvas) {
 		this.setCanvas(canvas)
-		toolState.setTool(new Tools.Brush(canvas))		// дефолтный выбранный инструмент
+		toolState.setTool(new Tools.Drag(canvas))		// дефолтный выбранный инструмент
 	}
 
 	setCanvas(canvas) {		

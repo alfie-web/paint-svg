@@ -40,6 +40,13 @@
 		cursor: crosshair
 
 
+.selected
+	cursor: move
+	pointer-events: visible
+	pointer-events: bounding-box
+	&:hover
+		outline: 1px solid #ebbef8
+
 .Brush, .Rect, .Ellipse, .Line
 	position: relative
 	stroke-linejoin: round

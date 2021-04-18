@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react-lite'
 // import classNames from 'classnames'
+import classNames from 'classnames'
 import canvasState from '../../../../store/canvasState'
+import toolState from '../../../../store/toolState'
 
 import Brush from '../Brush'
 import Rect from '../Rect'
@@ -8,6 +10,7 @@ import Ellipse from '../Ellipse'
 import Line from '../Line'
 import Text from '../Text'
 
+import Drag from '../../../../tools/Drag'
 
 const ToolComponents = {
    Brush,
@@ -33,10 +36,10 @@ const DrawArea = () => {
                   <Component
                      key={tool.id}
                      tool={tool}
-                     className={`${tool.type}`}
-                     // className={classNames(`${tool.type}`, {
-                     //    'animate': canvasState.animateId && canvasState.animateId === tool.id
-                     // })}
+                     // className={`${tool.type}`}
+                     className={classNames(`${tool.type}`, {
+                        'selected': toolState.tool && toolState.tool instanceof Drag
+                     })}
                   />
                )
             }

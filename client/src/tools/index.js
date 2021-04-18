@@ -5,6 +5,7 @@ import Line from './Line'
 import Move from './Move'
 import Rotate from './Rotate'
 import Text from './Text'
+import Drag from './Drag'
 
 const Tools = {
 	Brush,
@@ -13,7 +14,8 @@ const Tools = {
 	Line,
 	Move,
 	Rotate,
-	Text
+	Text,
+	Drag
 }
 
 export default Tools

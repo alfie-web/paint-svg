@@ -49,8 +49,8 @@ export default class Rotate extends Tool {
    }
 
    _calculateAngle(e) {
-      const clientX = e.clientX ? e.clientX : e.touches[0].clientX ? e.touches[0].pageX : null
-		const clientY = e.clientY ? e.clientY : e.touches[0].clientY ? e.touches[0].pageY : null
+      const clientX = e.clientX ? e.clientX : e.touches[0].clientX ? e.touches[0].clientX : null
+		const clientY = e.clientY ? e.clientY : e.touches[0].clientY ? e.touches[0].clientY : null
       let x = clientX - this.center.x
       let y = clientY - this.center.y
       let angle = this.R2D * Math.atan2(y, x)

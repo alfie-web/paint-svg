@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx"
 
 class ToolState {
 	tool = null
+	// fill = 'rgba(0,0,0,0)'
 	fill = 'none'
 	stroke = 'rgba(0,0,0,1)'
 	lineWidth = 2
