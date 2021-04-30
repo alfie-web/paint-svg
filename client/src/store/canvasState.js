@@ -152,6 +152,13 @@ class CanvasState {
 		}
 	}
 
+	leaveRoom = (id) => {
+		this.canvasSockets.leaveRoom(id)
+		this.canvas = null
+		this.svg = null
+		this.canvasData = []
+	}
+
 	startSocketListeners = (id) => {
 		this.canvasSockets = new CanvasSockets()
 

@@ -8,6 +8,10 @@ import toolState from '../store/toolState'
 // Избавиться от getToolIndexById искать объект по id
 // или мейби вообще его целиком сохранять в this.toolId
 
+// Оптимизировать ещё лучше
+// Например можно работать с ним как с неконтролируемым компонентом,
+// а при mouseUp сохранять в стейт????
+
 
 export default class Brush extends Tool {
    bufferSize = 8

@@ -22,7 +22,8 @@ const CanvasInit = () => {
       canvasState.fetchState(id, redirectIfError)
 
       return () => {
-         canvasState.canvasSockets.leaveRoom(id)
+         canvasState.leaveRoom(id)
+         // canvasState.canvasSockets.leaveRoom(id)
       }
    }, [id, history])
 
