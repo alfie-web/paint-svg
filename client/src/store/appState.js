@@ -15,9 +15,10 @@ class AppState {
    init = async () => {
       console.log('init')
       try {
-         const { data } = await usersAPI.refreshTokens()
-         localStorage.setItem('ATE', JSON.stringify(data.data.exp))
-         api.defaults.headers.common['token'] = data.data.accessToken
+         await usersAPI.refreshTokens()
+         // const { data } = await usersAPI.refreshTokens()
+         // localStorage.setItem('ATE', JSON.stringify(data.data.exp))
+         // api.defaults.headers.common['token'] = data.data.accessToken
       } catch (e) {}
 
       const authPromise = usersState.getMe()

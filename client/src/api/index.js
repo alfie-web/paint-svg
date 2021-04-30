@@ -1,5 +1,9 @@
+
 import axios from 'axios'
 import usersAPI from './users'
+
+// TODO:
+// Видимо придётся сохранять токен в переменной
 
 let baseURL
 
@@ -26,15 +30,12 @@ instance.interceptors.request.use(
 
       // console.log('AXIOS_CONFIG', config)
       if (ATExpiresIn) {
-         if (Date.now() >= ATExpiresIn * 1000) {
+         if (Date.now() >= +ATExpiresIn * 1000) {
             try {
                const { data } = await usersAPI.refreshTokens()
 
-               if (data.status === 'success') {
-                  localStorage.setItem('ATE', JSON.stringify(data.data.exp))
+               config.headers.token = data.accessToken || ''   // я как понял эта херня сохраняет 1 раз, только для текущего http запроса
 
-                  config.headers.token = data.data.accessToken || ''
-               }
             } catch (e) {
                console.log('e', e)
             }
