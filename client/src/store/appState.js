@@ -1,6 +1,6 @@
 import { makeAutoObservable, action } from 'mobx'
 
-import api from '../api'
+// import api from '../api'
 import usersAPI from '../api/users'
 
 import usersState from './usersState'
