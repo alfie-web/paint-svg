@@ -1,8 +1,13 @@
 import axios from 'axios'
 import usersAPI from './users'
 
-// const baseURL = 'https://collaborative-paint-app.herokuapp.com/api'
-const baseURL = 'http://localhost:8989/api'
+let baseURL
+
+if (process.env.NODE_ENV !== 'production') {
+   baseURL = 'http://localhost:8989/api'
+} else {
+   baseURL = 'https://collaborative-paint-app.herokuapp.com/api'
+}
 
 const axiosConfig = {
    withCredentials: true,
