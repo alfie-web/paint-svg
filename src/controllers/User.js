@@ -74,6 +74,7 @@ class UserController {
                data: {
                   exp: tokens.exp,
                   accessToken: tokens.accessToken,
+                  serverTime: Date.now()
                },
             })
          } else {
@@ -126,6 +127,7 @@ class UserController {
                data: {
                   exp: tokens.exp,
                   accessToken: tokens.accessToken,
+                  serverTime: Date.now()
                },
             })
          })
